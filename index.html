@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<!--
+	Twenty by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Brandon Taxes</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<link rel="stylesheet" href="assets/css/responsive-tables.css" />
+		<link rel="stylesheet" href="assets/css/jquery.wait-overlay.css" />
+	</head>
+	<body class="index">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header" class="alt">
+					<h1 id="logo"><a href="index.html">Brandon Taxes</a></h1>
+					<!--
+					<nav id="nav">
+						<ul>
+							<li class="current"><a href="index.html">Welcome</a></li>
+							<li class="submenu">
+								<a href="#">Layouts</a>
+								<ul>
+									<li><a href="left-sidebar.html">Left Sidebar</a></li>
+									<li><a href="right-sidebar.html">Right Sidebar</a></li>
+									<li><a href="no-sidebar.html">No Sidebar</a></li>
+									<li><a href="contact.html">Contact</a></li>
+									<li class="submenu">
+										<a href="#">Submenu</a>
+										<ul>
+											<li><a href="#">Dolore Sed</a></li>
+											<li><a href="#">Consequat</a></li>
+											<li><a href="#">Lorem Magna</a></li>
+											<li><a href="#">Sed Magna</a></li>
+											<li><a href="#">Ipsum Nisl</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li><a href="#" class="button special">Sign Up</a></li>
+						</ul>
+					</nav>
+					-->
+				</header>
+
+			<!-- Banner -->
+				<section id="banner">
+
+					<!--
+						".inner" is set up as an inline-block so it automatically expands
+						in both directions to fit whatever's inside it. This means it won't
+						automatically wrap lines, so be sure to use line breaks where
+						appropriate (<br />).
+					-->
+					<div class="inner">
+						<header>
+							<h2>BRANDON TAXES</h2>
+						</header>
+						<p>Type in a <strong>Roll Number</strong> to find more information</p>
+						<footer>
+								<form action="#mainData">
+									<div class="row 50%">
+										<div class="6u 12u(mobile)">
+											<input type="text" name="rollNumber" placeholder="Roll Number" />
+										</div>
+										<div class="6u 12u(mobile)">
+											<ul class="buttons">
+												<li><input type="submit" class="special" value="Search" /></li>
+											</ul>
+										</div>
+									</div>
+								</form>
+						</footer>
+
+					</div>
+
+				</section>
+
+				<!-- Main -->
+				<article id="main">
+
+					<header class="special container">
+						<span class="icon fa-bar-chart-o"></span>
+						<h2>All information below has been<br />obtained through <strong>Open Data</strong></h2>
+						<p>Seriously, please don't take this as a legit document.<br />
+							It is shown for information purposes and as an<br />
+							example of what can be done with Open Data</p>
+					</header>
+
+		
+					<section class="wrapper style3 container special" id="mainData">
+						<header>
+							<h2>Property Information</h2>
+						</header>
+						<div id="meta-wrapper">
+							<script id="meta-template" type="text/x-handlebars-template">
+								<div id="meta">
+									{{#metaTable assessment.meta}}{{/metaTable}}
+								</div>
+							</script>
+						</div>
+						<header>
+							<h2>Brandon Taxes</h2>
+						</header>
+						<div id="taxes-wrapper">
+							<script id="taxes-template" type="text/x-handlebars-template">
+								<div id="taxes">
+									{{#taxesTable taxes}}{{/taxesTable}}
+								</div>
+							</script>
+						</div>
+						<header>
+							<h2>Provincial Assessments</h2>
+						</header>
+						<div id="assessment-wrapper">					
+							<script id="assessment-template" type="text/x-handlebars-template">
+								<div id="assessment">
+									{{#assessmentTable assessment.assessment}}{{/assessmentTable}}
+								</div>
+							</script>
+						</div>
+					</section>
+
+				</article>
+
+			<!-- Footer -->
+				<footer id="footer">
+
+					<ul class="icons">
+						<li><a href="http://www.twitter.com/mattkiazyk" class="icon circle fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/mattkiazyk" class="icon circle fa-github"><span class="label">Github</span></a></li>
+					</ul>
+
+					<ul class="copyright">
+						<li>&copy; Matt Kiazyk</li><li>All Data is gathered through <strong>OPEN DATA</strong></li>
+					</ul>
+
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/handlebars.min-latest.js"></script>
+			<script src="assets/js/ybr.js"></script>			
+			<script src="assets/js/jquery.wait-overlay.js"></script>
+			<script src="assets/js/firebase.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
