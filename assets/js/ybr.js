@@ -1,5 +1,38 @@
 
+//**AUTOCOMPLETE **//
+$(function() {
+	$('#address').autocomplete({
+			minLength:3,
+	    source: function(request, response){
+					$.ajax({
+						url:"http://opendata.brandon.ca/opendataservice/Default.aspx",
+						type:"GET",
+						dataType:"jsonp",
+						contentType: "application/json",
+						async: true,
+						jsonpCallback: "autocompletecallback",
+						data: {
+							dataset: "property",
+							columns: "STREET_ADDRESS",
+							format: "jsonp",
+							values: request.term
+						},
+						success: function( data ) {
+							var newData = [];
+							
+							// add all the possible address names obtain from server to hint list on client side
+							for (var i = 0; i < data.length; i++) {
+								newData.push(data[i].STREET_ADDRESS);
+							} //for each
+							response( newData );
+						},
+					});		
+	    }
+	});
+});
+
 $(document).ready(function () {
+
 	Handlebars.registerHelper('assessmentTable', function(items, options) {
 	  var out = "<table class='responsive'>";
 		out = out + "<tr>"

@@ -15,6 +15,7 @@
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<link rel="stylesheet" href="assets/css/responsive-tables.css" />
 		<link rel="stylesheet" href="assets/css/jquery.wait-overlay.css" />
+		<link rel="stylesheet" href="assets/css/jquery-ui.min.css" />
 	</head>
 	<body class="index">
 		<div id="page-wrapper">
@@ -46,12 +47,12 @@
 						<header>
 							<h2>BRANDON TAXES</h2>
 						</header>
-						<p>Type in a <strong>Roll Number</strong> to find more information</p>
+						<p>Type in any <strong>Address</strong> to find more information</p>
 						<footer>
 								<form action="#mainData">
 									<div class="row 50%">
 										<div class="8u 12u(mobile)">
-											<input type="text" name="rollNumber" placeholder="Roll Number" />
+											<input type="text" id="address" maxlength="50" autocomplete="off" name="rollNumber" placeholder="100 Princess Ave" />
 										</div>
 										<div class="4u 12u(mobile)">
 											<ul class="buttons">
@@ -142,6 +143,7 @@
 			<script src="assets/js/firebase.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
+			<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 	</body>
 </html>
