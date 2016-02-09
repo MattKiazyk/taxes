@@ -22,7 +22,7 @@ $(function() {
 							
 							// add all the possible address names obtain from server to hint list on client side
 							for (var i = 0; i < data.length; i++) {
-								newData.push(data[i].STREET_ADDRESS);
+								newData.push({'value':data[i].dROLLNMBR, 'label':data[i].STREET_ADDRESS});
 							} //for each
 							response( newData );
 						},
