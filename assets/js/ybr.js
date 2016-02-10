@@ -134,6 +134,9 @@ $( window ).load(function() {
 		
 		$('#meta-wrapper').unwait();
 		$('#assessment-wrapper').unwait();	
+		
+		// To make tables responsive after we've udpated them
+		updateTables();
 	})
 	
 	// load Taxes from Firebase Databases
@@ -154,7 +157,10 @@ $( window ).load(function() {
 					$('#taxes-template').replaceWith(taxesHTML)
 					
 					$('#taxes-wrapper').unwait();
-						
+					
+					// To make tables responsive after we've udpated them
+					updateTables();
+					
 					// Disconnect firebase connection as we dont' need it anymore
 					Firebase.goOffline();
 				}, function (errorObject) {
