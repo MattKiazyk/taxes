@@ -143,7 +143,6 @@ $( window ).load(function() {
 	// This was downloaded in Jan 2016 as City of Brandon likes to remove old information (and not provide a way to get it)
 	// So when 2016 taxes are populated, we will have 3 years of history
 	var url = 'https://ybr.firebaseio.com/taxes/' + search 
-	console.log(url)
 	var taxesRef = new Firebase(url)
 	taxesRef.authAnonymously(function(error, authData) {
 		  if (error) {
@@ -151,11 +150,17 @@ $( window ).load(function() {
 		  } else {
 		    console.log("Authenticated successfully with Firebase storage API");
 				taxesRef.on("value", function(snapshot) {
-					var taxesJSON = {"taxes":snapshot.val()};
-					console.log(taxesJSON)
-					var taxesHTML = taxesTemplate(taxesJSON)
-					$('#taxes-template').replaceWith(taxesHTML)
+					// if user fills in an invalid rollNumber. Quit
+					if (!snapshot.exists()) {
+						$('#taxes-wrapper').unwait();
+						Firebase.goOffline();						
+						return
+					}
 					
+					var taxesJSON = {"taxes":snapshot.val()};
+					var taxesHTML = taxesTemplate(taxesJSON)
+					
+					$('#taxes-template').replaceWith(taxesHTML)
 					$('#taxes-wrapper').unwait();
 					
 					// To make tables responsive after we've udpated them
@@ -169,7 +174,6 @@ $( window ).load(function() {
 		
 		  }
 		});
-		
 });
 
 function getAssessmentHTML(rollNo) {
