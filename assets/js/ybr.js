@@ -101,14 +101,14 @@ $(document).ready(function () {
 //***SEARCH!!!!***//
 
 $( window ).load(function() {
-	
 	var search = getParameterByName('rollNumber')
 	if (search == null) {
 		return
 	}
- $('html, body').animate({
-     scrollTop: $("#mainData").offset().top
- });
+	
+	$('html, body').animate({
+  	scrollTop: $("#mainData").offset().top
+	});
 
 	var assessmentHTML = getAssessmentHTML(search)	
 	
@@ -122,6 +122,9 @@ $( window ).load(function() {
 	$('#meta-wrapper').wait();
 	$('#taxes-wrapper').wait();
 	$('#assessment-wrapper').wait();	
+	
+	// Loads a map showing the property in satellite view 
+	loadMap(search);
 	
 	Promise.all([assessmentHTML]).then(function(json) {	
 		
@@ -176,6 +179,55 @@ $( window ).load(function() {
 		});
 });
 
+function loadMap(rollNo) {
+	var map = L.map('map', {
+		scrollWheelZoom: false,
+		touchZoom: false,
+		zoomControl: false,
+		dragging: false,
+		doubleClickZoom: false
+	})
+
+	L.esri.imageMapLayer({
+		url: 'http://gis.brandon.ca/arcgis/rest/services/COBRA/BrandonOrtho2013/ImageServer'
+	}).addTo(map).bringToBack();
+
+	// This will show streets and Property lines. Do we want this? Looks cleaner without.
+	// L.esri.dynamicMapLayer({
+	// 	url: 'http://gis.brandon.ca/arcgis/rest/services/Juliet/propertySearch/MapServer',
+	// 	transparent : true,
+	// 	layers : [1,2,4,8,10],
+	// 	imageSR : 26914
+	// }).addTo(map).bringToFront();
+	
+	var find = L.esri.find({
+		url: 'http://gis.brandon.ca/arcgis/rest/services/Juliet/propTax/MapServer'
+	});
+
+	find.layers('0')
+			.text(rollNo)
+			.fields('BROLL')
+			.contains(false)
+		
+	find.run(function(error, featureCollection, response){
+		var polygon =	L.geoJson(featureCollection, {
+			style: style
+		});
+		polygon.addTo(map).bringToFront();
+		// fit the map to around the polygon
+		map.fitBounds(polygon.getBounds());
+	});
+}
+
+function style(feature) {
+    return {
+        fillColor: 'white',
+        weight: 2,
+        opacity: 0.6,
+        color: 'white',
+        fillOpacity: 0.2
+    };
+}
 function getAssessmentHTML(rollNo) {
 	return new Promise(function(resolve,reject) {
 			// loads MB Gov assessment website and searches (based on Municipality Brandon) for roll no
