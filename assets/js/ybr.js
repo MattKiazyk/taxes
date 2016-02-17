@@ -189,12 +189,12 @@ function loadMap(rollNo) {
 	}).addTo(map).bringToBack();
 
 	// This will show streets and Property lines. Do we want this? Looks cleaner without.
-	// L.esri.dynamicMapLayer({
-	// 	url: 'http://gis.brandon.ca/arcgis/rest/services/Juliet/propertySearch/MapServer',
-	// 	transparent : true,
-	// 	layers : [1,2,4,8,10],
-	// 	imageSR : 26914
-	// }).addTo(map).bringToFront();
+	L.esri.dynamicMapLayer({
+		url: 'http://gis.brandon.ca/arcgis/rest/services/Juliet/propertySearch/MapServer',
+		transparent : true,
+		layers : [1,2,4,8,10],
+		imageSR : 26914
+	}).addTo(map).bringToFront();
 	
 	var find = L.esri.find({
 		url: 'http://gis.brandon.ca/arcgis/rest/services/Juliet/propTax/MapServer'
@@ -217,10 +217,10 @@ function loadMap(rollNo) {
 
 function style(feature) {
     return {
-        fillColor: 'white',
+        fillColor: 'yellow',
         weight: 2,
         opacity: 0.6,
-        color: 'white',
+        color: 'yellow',
         fillOpacity: 0.2
     };
 }
