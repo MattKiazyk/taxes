@@ -181,11 +181,7 @@ $( window ).load(function() {
 
 function loadMap(rollNo) {
 	var map = L.map('map', {
-		scrollWheelZoom: false,
-		touchZoom: false,
-		zoomControl: false,
-		dragging: false,
-		doubleClickZoom: false
+		scrollWheelZoom: false
 	})
 
 	L.esri.imageMapLayer({
