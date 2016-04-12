@@ -1,4 +1,5 @@
-
+var startYear = 2015
+		
 //**AUTOCOMPLETE **//
 $(function() {
 	$('#address').autocomplete({
@@ -61,8 +62,11 @@ $(document).ready(function () {
 	  var out = "<table class='responsive'>";
 		out = out + "<tr>"
 		out = out + "<th>Type</th>";
-		out = out + "<th>2015</th>";
-		out = out + "<th>2014</th>";
+		for (year = startYear; year > 2000; year--) {
+			if (items[year]) {
+				out = out + "<th>" + year + "</th>"
+			}
+		}
 		out = out + "</tr>"
 
 	 	out = out + "<tr>"
@@ -81,13 +85,13 @@ $(document).ready(function () {
 	  out = out + "<td>Local Improvements</td>"+ "<td>$" + Number(items[2015]["Local_Improvements"]).formatMoney()  + "</td>" + "<td>$" + Number(items[2014]["Local_Improvements"]).formatMoney()  + "</td>";
 		out = out + "</tr>"
 		out = out + "<tr>"
-	  out = out + "<td>Gross Tax Amount</td>"+ "<td>$" + Number(items[2015]["Gross_Tax_Amount"]).formatMoney()  + "</td>" + "<td>$" + Number(items[2014]["Gross_Tax_Amount"]).formatMoney()  + "</td>";
+	  out = out + "<td>Gross Tax Amount</td>" + yearLoop(items, "Gross_Tax_Amount");
 		out = out + "</tr>"
 		out = out + "<tr>"
-	  out = out + "<td>Home Owner Grant</td>"+ "<td>$" + Number(items[2015]["Home_Owner_Grant"]).formatMoney()  + "</td>" + "<td>$" + Number(items[2014]["Home_Owner_Grant"]).formatMoney()  + "</td>";
+	  out = out + "<td>Home Owner Grant</td>" + yearLoop(items, "Home_Owner_Grant");
 		out = out + "</tr>"
 		out = out + "<tr>"
-	  out = out + "<td>Net Tax Amount</td>"+ "<td>$" + Number(items[2015]["Net_Tax_Amount"]).formatMoney()  + "</td>" + "<td>$" + Number(items[2014]["Net_Tax_Amount"]).formatMoney()  + "</td>";
+	  out = out + "<td>Net Tax Amount</td>" + yearLoop(items, "Net_Tax_Amount");
 		out = out + "</tr>"
 	  return out + "</table>";
 	});
@@ -95,9 +99,17 @@ $(document).ready(function () {
 	Handlebars.registerHelper('metaTable', function(items, options) {
 		return items;
 	})
-	
 });
 
+function yearLoop(years, item) {
+	var out = ""
+	for (year = startYear; year > 2000; year--) {
+		if (years[year]) {
+			out = out + "<td>$" + Number(years[year][item]).formatMoney()  + "</td>"
+		}
+	}
+	return out
+}
 //***SEARCH!!!!***//
 
 $( window ).load(function() {
