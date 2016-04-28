@@ -114,7 +114,7 @@ $(document).ready(function () {
 
 function yearLoop(years, item) {
 	var out = ""
-	for (year = startYear; year > 2000; year--) {
+	for (year = startYear - 1; year > 2000; year--) {
 		if (years[year]) {
 			out = out + "<td>$" + Number(years[year][item]).formatMoney()  + "</td>"
 		}
@@ -148,22 +148,6 @@ $( window ).load(function() {
 	
 	// Loads a map showing the property in satellite view 
 	loadMap(search);
-	// 
-	// Promise.all([assessmentHTML]).then(function(json) {	
-	// 	
-	// 	var items = {"assessment":json[0]};
-	// 	var html = assessmentTemplate(items)
-	// 	var metaHTML = metaTemplate(items)
-	// 
-	//  	$('#assessment-template').replaceWith(html);
-	// 	$('#meta-template').replaceWith(metaHTML);
-	// 	
-	// 	$('#meta-wrapper').unwait();
-	// 	$('#assessment-wrapper').unwait();	
-	// 	
-	// 	// To make tables responsive after we've udpated them
-	// 	updateTables();
-	// })
 	
 	// load Taxes from Firebase Databases
 	// This was downloaded in Jan 2016 as City of Brandon likes to remove old information (and not provide a way to get it)
