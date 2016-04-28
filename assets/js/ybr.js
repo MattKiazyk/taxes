@@ -1,4 +1,4 @@
-var startYear = 2015
+var startYear = 2016
 		
 //**AUTOCOMPLETE **//
 $(function() {
@@ -35,6 +35,8 @@ $(function() {
 $(document).ready(function () {
 
 	Handlebars.registerHelper('assessmentTable', function(items, options) {
+	
+		var items = options.data.root.taxes;
 	  var out = "<table class='responsive'>";
 		out = out + "<tr>"
 		out = out + "<th>Tax Year</th>";
@@ -44,16 +46,22 @@ $(document).ready(function () {
 		out = out + "<th>Buildings</th>";
 		out = out + "<th>Total</th>";
 		out = out + "</tr>"
-
-	  for(var i=0, l=items.length; i<l; i++) {
-			out = out + "<tr>"
-	    out = out + "<td>" + items[i]["Tax Year"] + "</td>";
-	    out = out + "<td>" + items[i]["Assessment Reference Date"] + "</td>";
-	    out = out + "<td>" + items[i]["Class"] + "</td>";
-	    out = out + "<td>" + items[i]["Land"] + "</td>";
-	    out = out + "<td>" + items[i]["Buildings"] + "</td>";
-	    out = out + "<td>" + items[i]["Total"] + "</td>";
-			out = out + "</tr>"
+		
+	  for (year = startYear; year > 2000; year--) {
+			var item = items[year];
+			if (item) {
+				var assessment = item.assessment;
+				if (assessment) {
+					out = out + "<tr>"
+			    out = out + "<td>" + year + "</td>";
+			    out = out + "<td>" + assessment['Assessment Reference Date'] + "</td>";
+			    out = out + "<td>" + assessment['Class'] + "</td>";
+			    out = out + "<td>" + assessment['Land'] + "</td>";
+			    out = out + "<td>" + assessment['Buildings'] + "</td>";
+			    out = out + "<td>" + assessment['Total'] + "</td>";
+					out = out + "</tr>"
+			}
+			}
 	  }
 	  return out + "</table>";
 	});
@@ -62,7 +70,9 @@ $(document).ready(function () {
 	  var out = "<table class='responsive'>";
 		out = out + "<tr>"
 		out = out + "<th>Type</th>";
-		for (year = startYear; year > 2000; year--) {
+		
+		// -1 as 2016 taxes aren't available yet, but assessments are
+		for (year = startYear-1; year > 2000; year--) {
 			if (items[year]) {
 				out = out + "<th>" + year + "</th>"
 			}
@@ -97,7 +107,8 @@ $(document).ready(function () {
 	});
 	
 	Handlebars.registerHelper('metaTable', function(items, options) {
-		return items;
+		var items = options.data.root.taxes;
+		return items[startYear].assessment.meta
 	})
 });
 
@@ -122,7 +133,7 @@ $( window ).load(function() {
   	scrollTop: $("#mainData").offset().top
 	});
 
-	var assessmentHTML = getAssessmentHTML(search)	
+	//var assessmentHTML = getAssessmentHTML(search)	
 	
 	var assessmentSource = $('#assessment-template').html();
 	var assessmentTemplate = Handlebars.compile(assessmentSource);
@@ -137,22 +148,22 @@ $( window ).load(function() {
 	
 	// Loads a map showing the property in satellite view 
 	loadMap(search);
-	
-	Promise.all([assessmentHTML]).then(function(json) {	
-		
-		var items = {"assessment":json[0]};
-		var html = assessmentTemplate(items)
-		var metaHTML = metaTemplate(items)
-
-	 	$('#assessment-template').replaceWith(html);
-		$('#meta-template').replaceWith(metaHTML);
-		
-		$('#meta-wrapper').unwait();
-		$('#assessment-wrapper').unwait();	
-		
-		// To make tables responsive after we've udpated them
-		updateTables();
-	})
+	// 
+	// Promise.all([assessmentHTML]).then(function(json) {	
+	// 	
+	// 	var items = {"assessment":json[0]};
+	// 	var html = assessmentTemplate(items)
+	// 	var metaHTML = metaTemplate(items)
+	// 
+	//  	$('#assessment-template').replaceWith(html);
+	// 	$('#meta-template').replaceWith(metaHTML);
+	// 	
+	// 	$('#meta-wrapper').unwait();
+	// 	$('#assessment-wrapper').unwait();	
+	// 	
+	// 	// To make tables responsive after we've udpated them
+	// 	updateTables();
+	// })
 	
 	// load Taxes from Firebase Databases
 	// This was downloaded in Jan 2016 as City of Brandon likes to remove old information (and not provide a way to get it)
@@ -171,12 +182,20 @@ $( window ).load(function() {
 						Firebase.goOffline();						
 						return
 					}
-					
 					var taxesJSON = {"taxes":snapshot.val()};
 					var taxesHTML = taxesTemplate(taxesJSON)
-					
+
+					var assessmentHtml = assessmentTemplate(taxesJSON)
+					var metaHTML = metaTemplate(taxesJSON)
+						
 					$('#taxes-template').replaceWith(taxesHTML)
 					$('#taxes-wrapper').unwait();
+					
+					$('#assessment-template').replaceWith(assessmentHtml);
+					$('#assessment-wrapper').unwait();	
+					
+					$('#meta-template').replaceWith(metaHTML);
+					$('#meta-wrapper').unwait();	
 					
 					// To make tables responsive after we've udpated them
 					updateTables();
@@ -221,9 +240,10 @@ function loadMap(rollNo) {
 		var polygon =	L.geoJson(featureCollection, {
 			style: style
 		});
+		var center = polygon.getBounds().getCenter();
 		polygon.addTo(map).bringToFront();
 		// fit the map to around the polygon
-		map.fitBounds(polygon.getBounds());
+		map.fitBounds(polygon.getBounds().pad(0.5));
 	});
 }
 
@@ -235,16 +255,6 @@ function style(feature) {
         color: 'yellow',
         fillOpacity: 0.2
     };
-}
-function getAssessmentHTML(rollNo) {
-	return new Promise(function(resolve,reject) {
-			// loads MB Gov assessment website and searches (based on Municipality Brandon) for roll no
-			// Does some fancy viewstate passing to work with their .net server.
-			var assessmentURL = 'http://www.mattkiazyk.com/bites/005/assess.php?type=json&roll=' + rollNo;
-			$.get(assessmentURL, function( data ) {
-				resolve(data);
-			});
-	});
 }
 
 function getParameterByName(name, url) {
