@@ -108,7 +108,20 @@ $(document).ready(function () {
 	
 	Handlebars.registerHelper('metaTable', function(items, options) {
 		var items = options.data.root.taxes;
-		return items[startYear].assessment.meta
+		var out = "<table class='responsive'>"
+		out = out + "<tr>"
+		out = out + "<td>Civic Address:</td><td>" + items["address"] + "</td>"
+		out = out + "</tr>"
+		out = out + "<tr>"
+		out = out + "<td>Frontage:</td><td>" + items["frontage"] + " feet</td>"
+		out = out + "</tr>"
+		out = out + "<tr>"
+		out = out + "<td>Legal:</td><td>" + items["legal"] + "</td>"
+		out = out + "</tr>"
+		out = out + "</table>"
+		
+	
+		return out
 	})
 });
 
