@@ -109,17 +109,17 @@ $(document).ready(function () {
 	Handlebars.registerHelper('metaTable', function(items, options) {
 		var items = options.data.root.taxes;
 		var out = "<table class='responsive'>"
-		if (items["address"]) {}
+		if (items["address"]) {
 			out = out + "<tr>"
 			out = out + "<td>Civic Address:</td><td>" + items["address"] + "</td>"
 			out = out + "</tr>"
 		}
-		if (items["frontage"]) {}
+		if (items["frontage"]) {
 			out = out + "<tr>"
 			out = out + "<td>Frontage:</td><td>" + items["frontage"] + " feet</td>"
 			out = out + "</tr>"
 		}
-		if (items["legal"]) {}
+		if (items["legal"]) {
 			out = out + "<tr>"
 			out = out + "<td>Legal:</td><td>" + items["legal"] + "</td>"
 			out = out + "</tr>"
