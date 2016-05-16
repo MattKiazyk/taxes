@@ -71,8 +71,7 @@ $(document).ready(function () {
 		out = out + "<tr>"
 		out = out + "<th>Type</th>";
 		
-		// -1 as 2016 taxes aren't available yet, but assessments are
-		for (year = startYear-1; year > 2000; year--) {
+		for (year = startYear; year > 2000; year--) {
 			if (items[year]) {
 				out = out + "<th>" + year + "</th>"
 			}
@@ -80,19 +79,19 @@ $(document).ready(function () {
 		out = out + "</tr>"
 
 	 	out = out + "<tr>"
-	  out = out + "<td>School Division</td>"+ "<td>$" + Number(items[2015]["School_Division"]).formatMoney() + "</td>" + "<td>$" + Number(items[2014]["School_Division"]).formatMoney()  + "</td>";
+	  out = out + "<td>School Division</td><td></td>" + "<td>$" + Number(items[2015]["School_Division"]).formatMoney() + "</td>" + "<td>$" + Number(items[2014]["School_Division"]).formatMoney()  + "</td>";
 		out = out + "</tr>"
 		out = out + "<tr>"
-	  out = out + "<td>Provincial Education</td>"+ "<td>$" + Number(items[2015]["Provincial_Education"]).formatMoney()  + "</td>" + "<td>$" + Number(items[2014]["Provincial_Education"]).formatMoney()  + "</td>";
+	  out = out + "<td>Provincial Education</td><td></td>"+ "<td>$" + Number(items[2015]["Provincial_Education"]).formatMoney()  + "</td>" + "<td>$" + Number(items[2014]["Provincial_Education"]).formatMoney()  + "</td>";
 		out = out + "</tr>"		
 	  out = out + "<tr>"
-	  out = out + "<td>General Municipal</td>"+ "<td>$" + Number(items[2015]["General_Municipal"]).formatMoney()  + "</td>" + "<td>$" + Number(items[2014]["General_Municipal"]).formatMoney()  + "</td>";
+	  out = out + "<td>General Municipal</td><td></td>"+ "<td>$" + Number(items[2015]["General_Municipal"]).formatMoney()  + "</td>" + "<td>$" + Number(items[2014]["General_Municipal"]).formatMoney()  + "</td>";
 		out = out + "</tr>"
 		out = out + "<tr>"
-	  out = out + "<td>Loc. Imp. Debt Serv.</td>"+ "<td>$" + Number(items[2015]["Loc_Imp_Debt_Serv"]).formatMoney()  + "</td>" + "<td>$" + Number(items[2014]["Loc_Imp_Debt_Serv"]).formatMoney()  + "</td>";
+	  out = out + "<td>Loc. Imp. Debt Serv.</td><td></td>"+ "<td>$" + Number(items[2015]["Loc_Imp_Debt_Serv"]).formatMoney()  + "</td>" + "<td>$" + Number(items[2014]["Loc_Imp_Debt_Serv"]).formatMoney()  + "</td>";
 		out = out + "</tr>"
 		out = out + "<tr>"
-	  out = out + "<td>Local Improvements</td>"+ "<td>$" + Number(items[2015]["Local_Improvements"]).formatMoney()  + "</td>" + "<td>$" + Number(items[2014]["Local_Improvements"]).formatMoney()  + "</td>";
+	  out = out + "<td>Local Improvements</td><td></td>"+ "<td>$" + Number(items[2015]["Local_Improvements"]).formatMoney()  + "</td>" + "<td>$" + Number(items[2014]["Local_Improvements"]).formatMoney()  + "</td>";
 		out = out + "</tr>"
 		out = out + "<tr>"
 	  out = out + "<td>Gross Tax Amount</td>" + yearLoop(items, "Gross_Tax_Amount");
@@ -133,7 +132,7 @@ $(document).ready(function () {
 
 function yearLoop(years, item) {
 	var out = ""
-	for (year = startYear - 1; year > 2000; year--) {
+	for (year = startYear; year > 2000; year--) {
 		if (years[year]) {
 			out = out + "<td>$" + Number(years[year][item]).formatMoney()  + "</td>"
 		}
