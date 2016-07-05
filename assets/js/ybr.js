@@ -79,19 +79,16 @@ $(document).ready(function () {
 		out = out + "</tr>"
 
 	 	out = out + "<tr>"
-	  out = out + "<td>School Division</td><td></td>" + "<td>$" + Number(items[2015]["School_Division"]).formatMoney() + "</td>" + "<td>$" + Number(items[2014]["School_Division"]).formatMoney()  + "</td>";
+	  out = out + "<td>School Division</td>" + yearLoop(items, "School_Division");
 		out = out + "</tr>"
 		out = out + "<tr>"
-	  out = out + "<td>Provincial Education</td><td></td>"+ "<td>$" + Number(items[2015]["Provincial_Education"]).formatMoney()  + "</td>" + "<td>$" + Number(items[2014]["Provincial_Education"]).formatMoney()  + "</td>";
+	  out = out + "<td>Provincial Education</td>" + yearLoop(items, "Provincial_Education");
 		out = out + "</tr>"		
 	  out = out + "<tr>"
-	  out = out + "<td>General Municipal</td><td></td>"+ "<td>$" + Number(items[2015]["General_Municipal"]).formatMoney()  + "</td>" + "<td>$" + Number(items[2014]["General_Municipal"]).formatMoney()  + "</td>";
+	  out = out + "<td>General Municipal</td>" + yearLoop(items, "General_Municipal");
 		out = out + "</tr>"
 		out = out + "<tr>"
-	  out = out + "<td>Loc. Imp. Debt Serv.</td><td></td>"+ "<td>$" + Number(items[2015]["Loc_Imp_Debt_Serv"]).formatMoney()  + "</td>" + "<td>$" + Number(items[2014]["Loc_Imp_Debt_Serv"]).formatMoney()  + "</td>";
-		out = out + "</tr>"
-		out = out + "<tr>"
-	  out = out + "<td>Local Improvements</td><td></td>"+ "<td>$" + Number(items[2015]["Local_Improvements"]).formatMoney()  + "</td>" + "<td>$" + Number(items[2014]["Local_Improvements"]).formatMoney()  + "</td>";
+	  out = out + "<td>Local Improvements</td>" + yearLoop(items, "Loc_Imp_Debt_Serv");
 		out = out + "</tr>"
 		out = out + "<tr>"
 	  out = out + "<td>Gross Tax Amount</td>" + yearLoop(items, "Gross_Tax_Amount");
@@ -229,6 +226,7 @@ function loadMap(rollNo) {
 		imageSR : 26914
 	}).addTo(map).bringToFront();
 	
+	// Shows property polygon
 	var find = L.esri.find({
 		url: 'http://gis.brandon.ca/arcgis/rest/services/Juliet/propTax/MapServer'
 	});
@@ -247,6 +245,22 @@ function loadMap(rollNo) {
 		// fit the map to around the polygon
 		map.fitBounds(polygon.getBounds().pad(0.5));
 	});
+	
+	// LEAD PIPES
+	// var query = L.esri.query({
+	//     url:'http://gis.brandon.ca/arcgis/rest/services/COBRA/COBRAmapService/MapServer/12'
+	// });
+	// 
+	// query.where("InstallDate<='Jan 1, 1952'");
+	// 
+	// query.run(function(error, featureCollection, response){
+	//     console.log('Found ' + featureCollection.features.length + ' features');
+	// 		var polyLine =	L.geoJson(featureCollection, {
+	// 			style: leadPipeStyle
+	// 		});
+	// 		polyLine.addTo(map).bringToFront();
+	// });
+			
 }
 
 function style(feature) {
@@ -255,6 +269,16 @@ function style(feature) {
         weight: 2,
         opacity: 0.6,
         color: 'yellow',
+        fillOpacity: 0.2
+    };
+}
+
+function leadPipeStyle(feature) {
+    return {
+        fillColor: 'red',
+        weight: 2,
+        opacity: 0.6,
+        color: 'red',
         fillOpacity: 0.2
     };
 }
