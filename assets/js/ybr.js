@@ -165,8 +165,6 @@ $( window ).load(function() {
 	loadMap(search);
 	
 	// load Taxes from Firebase Databases
-	// This was downloaded in Jan 2016 as City of Brandon likes to remove old information (and not provide a way to get it)
-	// So when 2016 taxes are populated, we will have 3 years of history
 	var url = 'https://ybr.firebaseio.com/taxes/' + search 
 	var taxesRef = new Firebase(url)
 	taxesRef.authAnonymously(function(error, authData) {
@@ -247,20 +245,36 @@ function loadMap(rollNo) {
 	});
 	
 	// LEAD PIPES
-	// var query = L.esri.query({
-	//     url:'http://gis.brandon.ca/arcgis/rest/services/COBRA/COBRAmapService/MapServer/12'
-	// });
-	// 
-	// query.where("InstallDate<='Jan 1, 1952'");
-	// 
-	// query.run(function(error, featureCollection, response){
-	//     console.log('Found ' + featureCollection.features.length + ' features');
-	// 		var polyLine =	L.geoJson(featureCollection, {
-	// 			style: leadPipeStyle
-	// 		});
-	// 		polyLine.addTo(map).bringToFront();
-	// });
-			
+	var query = L.esri.query({
+		    url:'http://gis.brandon.ca/arcgis/rest/services/COBRA/COBRAmapService/MapServer/12'
+		});
+		
+		query.where("InstallDate<='Jan 1, 1952'");
+		
+		query.run(function(error, featureCollection, response){
+		    console.log('Found ' + featureCollection.features.length + ' features');
+				var polyLine =	L.geoJson(featureCollection, {
+					style: leadPipeStyle,
+					onEachFeature: onEachFeature
+				});
+				polyLine.addTo(map).bringToFront();
+
+		});
+		
+		var info = L.control();
+
+		info.onAdd = function (map) {
+		    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+		    this.update();
+		    return this._div;
+		};
+
+		// method that we will use to update the control based on feature properties passed
+		info.update = function (props) {
+		    this._div.innerHTML = '<h4>Lead Pipes</h4>Click on any red line to<br />show info on potential lead pipes.</br><a href="http://www.brandon.ca/water-treatment/lead-water-services-information">More Info</a>';
+		};
+
+		info.addTo(map);
 }
 
 function style(feature) {
@@ -281,6 +295,37 @@ function leadPipeStyle(feature) {
         color: 'red',
         fillOpacity: 0.2
     };
+}
+
+function onEachFeature(feature, layer) {
+	var print = function(o){
+	    var str='';
+
+	    for(var p in o){
+					if (p == 'OBJECTID' || p == 'GlobalID') {
+						continue;
+					}
+	        if(typeof o[p] == 'object'){
+	            str+= p + ': { </br>' + print(o[p]) + '}';
+	        }else{
+							if (typeof o[p] == 'number') {
+								var d = new Date(o[p]);
+								if (d) {
+									str+= p + ': ' + d.toISOString().slice(0, 10) +'</br>';
+								} else {
+									str+= p + ': ' + o[p]+'</br>';
+								}
+							} else {
+	            	str+= p + ': ' + o[p]+'</br>';
+							}
+	        }
+	    }
+	    return str;
+	}
+
+    if (feature.properties) {
+        layer.bindPopup(print(feature.properties));
+    }
 }
 
 function getParameterByName(name, url) {
