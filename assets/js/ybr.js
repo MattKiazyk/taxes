@@ -40,7 +40,7 @@ $(document).ready(function () {
 	  var out = "<table class='responsive'>";
 		out = out + "<tr>"
 		out = out + "<th>Tax Year</th>";
-		out = out + "<th>Assessment Reference Date</th>";
+		out = out + "<th>Reference Date</th>";
 		out = out + "<th>Class</th>";
 		out = out + "<th>Land</th>";
 		out = out + "<th>Buildings</th>";
