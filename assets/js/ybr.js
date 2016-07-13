@@ -60,12 +60,37 @@ $(document).ready(function () {
 			    out = out + "<td>" + assessment['Buildings'] + "</td>";
 			    out = out + "<td>" + assessment['Total'] + "</td>";
 					out = out + "</tr>"
-			}
+				}
 			}
 	  }
 	  return out + "</table>";
 	});
 
+	Handlebars.registerHelper('saleTable', function(items, options) {
+		var items = options.data.root.taxes;
+	  var out = "<table class='responsive'>";
+		out = out + "<tr>"
+		out = out + "<th>Sale Date</th>";
+		out = out + "<th>Consideration</th>";
+		out = out + "</tr>"
+		
+	  for (year = startYear; year > 2000; year--) {
+			var item = items[year];
+			if (item) {
+				var sale = item.sales;
+
+				for(var saleItem in sale){
+					var saleDetail = sale[saleItem]
+					out = out + "<tr>"
+			    out = out + "<td>" + saleDetail['Sale Date'] + "</td>";
+			    out = out + "<td>" + saleDetail.Consideration + "</td>";
+					out = out + "</tr>"			
+				}
+			}
+	  }
+	  return out + "</table>";
+	});
+	
 	Handlebars.registerHelper('taxesTable', function(items, options) {
 	  var out = "<table class='responsive'>";
 		out = out + "<tr>"
@@ -156,10 +181,13 @@ $( window ).load(function() {
 	var metaTemplate = Handlebars.compile(metaSource);
 	var taxesSource = $('#taxes-template').html();
 	var taxesTemplate = Handlebars.compile(taxesSource);
+	var saleSource = $('#sales-template').html();
+	var saleTemplate = Handlebars.compile(saleSource);
 	
 	$('#meta-wrapper').wait();
 	$('#taxes-wrapper').wait();
-	$('#assessment-wrapper').wait();	
+	$('#assessment-wrapper').wait();
+	$('#sales-wrapper').wait();
 	
 	// Loads a map showing the property in satellite view 
 	loadMap(search);
@@ -184,6 +212,7 @@ $( window ).load(function() {
 
 					var assessmentHtml = assessmentTemplate(taxesJSON)
 					var metaHTML = metaTemplate(taxesJSON)
+					var saleHTML = saleTemplate(taxesJSON)
 						
 					$('#taxes-template').replaceWith(taxesHTML)
 					$('#taxes-wrapper').unwait();
@@ -193,6 +222,9 @@ $( window ).load(function() {
 					
 					$('#meta-template').replaceWith(metaHTML);
 					$('#meta-wrapper').unwait();	
+					
+					$('#sales-template').replaceWith(saleHTML);
+					$('#sales-wrapper').unwait();
 					
 					// To make tables responsive after we've udpated them
 					updateTables();
