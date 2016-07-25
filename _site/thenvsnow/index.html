@@ -1,0 +1,226 @@
+<!DOCTYPE HTML>
+<!--
+	Twenty by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Brandon Taxes - An Open Data Project</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="../assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="../assets/css/ie9.css" /><![endif]-->
+		<link rel="stylesheet" media="screen" href="../assets/css/responsive-tables.css" />
+		<link rel="stylesheet" href="../assets/css/jquery.wait-overlay.css" />
+		<link rel="stylesheet" href="../assets/css/jquery-ui.min.css" />
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v1.0.0-rc.1/leaflet.css" />
+		
+	</head>
+	<body class="index">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1 id="logo"><a href="../">Brandon Taxes</a></h1>
+
+					<nav id="nav">
+						<ul>
+							<li><a href="../" class="">Taxes</a></li>
+							<li><a href="thenvsnow/" class="">Then vs Now</a></li>
+							<li><a href="../assessments/" class="">Assessments</a></li>
+						</ul>					
+					</nav>
+
+				</header>
+	
+				<!-- Main -->
+				<article id="main">
+
+					<header class="special container">
+						<span class="icon fa-map-o"></span>
+						<h2>See what Brandon looked like in the past vs today!</h2>
+					</header>
+
+		
+					<section class="wrapper style3 container special">
+						<div class="content">
+							<style>
+						
+							.title {font-size:30px;}
+							
+							#thenmap {
+								height:500px;
+							}
+							.range {
+							  width:100%;
+							  }
+							.leaflet-top .leaflet-control-zoom {
+							  top:20px;
+							  }
+							#loaderOverlay {
+								width:100%;
+								height:100%;
+							}
+							#left {float:left;}
+							#right {float:right;}
+							</style>
+							
+							<div id="thenmap"></div>
+							<input id='range' class='range' type='range' min='0' max='1.0' step='any' />
+
+							<span id="left" class="title">2015</span>
+							<span id="right" class="title">2010</span>
+
+							<div id="loaderOverlay"></div>
+						</div>
+					</section>
+
+				</article>
+
+				<section id="cta">
+					<h2>WANT TO <strong>HELP OUT</strong>?</h2>
+					<p>BrandonTaxes.com is an <strong>open source</strong> project. </p>
+				</section>
+			<!-- Footer -->
+				<footer id="footer">
+
+					<ul class="icons">
+						<li><a href="http://www.twitter.com/mattkiazyk" class="icon circle fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/mattkiazyk/taxes" class="icon circle fa-github"><span class="label">Github</span></a></li>
+					</ul>
+
+					<ul class="copyright">
+						<li>&copy; Matt Kiazyk</li><li>All Data is gathered through <strong>OPEN DATA</strong></li>
+					</ul>
+
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+		<!-- Load Leaflet from CDN-->
+	  <link rel="stylesheet" href="https://cdn.jsdelivr.net/leaflet/0.7.3/leaflet.css" />
+	  <script src="https://cdn.jsdelivr.net/leaflet/0.7.3/leaflet.js"></script>
+
+	  <!-- Load Esri Leaflet from CDN -->
+	  <script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet/1.0.0-rc.5/esri-leaflet.js"></script>
+	  <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+					
+			<script src="../assets/js/jquery.wait-overlay.js"></script>
+			
+			<!--[if lte IE 8]><script src="../assets/js/ie/respond.min.js"></script><![endif]-->
+						<script src="../assets/js/jquery.dropotron.min.js"></script>
+						<script src="../assets/js/jquery.scrolly.min.js"></script>
+						<script src="../assets/js/jquery.scrollgress.min.js"></script>
+						<script src="../assets/js/skel.min.js"></script>
+						<script src="../assets/js/util.js"></script>
+						<script src="../assets/js/handlebars.min-latest.js"></script>
+						<script src="../assets/js/main.js"></script>		
+			<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+			<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-575684-5', 'auto');
+			  ga('send', 'pageview');
+
+			</script>
+			
+			<script>
+
+				var map = L.map('thenmap')
+				map.scrollWheelZoom.disable();
+
+				L.esri.basemapLayer('Gray', {
+				  minZoom: 12,
+				  maxZoom: 21,
+				}).addTo(map);	
+
+				var overlayURL = "http://gis.brandon.ca/arcgis/rest/services/COBRA/BrandonOrtho2015/ImageServer";
+				var underlayURL = "http://gis.brandon.ca/arcgis/rest/services/COBRA/BrandonOrtho2013/ImageServer";
+				var underlayURL2 = "http://gis.brandon.ca/arcgis/rest/services/COBRA/BrandonOrtho2010/ImageServer";
+				var oldURL = "http://gis.brandon.ca/arcgis/rest/services/COBRA/BrandonOrtho2005/ImageServer";
+
+				var overlay = L.esri.imageMapLayer(overlayURL, {position:'front'});
+				var underlay = L.esri.imageMapLayer(underlayURL);
+				var underlay2 = L.esri.imageMapLayer(underlayURL2);
+				var oldMap = L.esri.imageMapLayer(oldURL);
+
+				overlay.on('load', function(e){
+					$('#loaderOverlay').unwait();
+					clip();
+				});
+				overlay.on('loading', function(e){
+					$('#loaderOverlay').wait();
+				});
+				overlay.addTo(map);
+
+				underlay.on('load', function(e){
+					$('#loaderOverlay').unwait();	
+					clip();
+				});
+				underlay.on('loading', function(e){
+					$('#loaderOverlay').wait();
+				});
+				underlay.addTo(map);
+
+				underlay2.on('load', function(e){
+					$('#loaderOverlay').unwait();	
+					clip();
+				});
+				underlay2.on('loading', function(e){
+					$('#loaderOverlay').wait();
+				});
+				underlay2.addTo(map);
+
+				oldMap.on('load', function(e){
+					$('#loaderOverlay').unwait();	
+					clip();
+				});
+				oldMap.on('loading', function(e){
+					$('#loaderOverlay').wait();
+				});
+
+				var range = document.getElementById('range');
+
+				function clip() {
+				  var nw = map.containerPointToLayerPoint([0, 0]),
+				      se = map.containerPointToLayerPoint(map.getSize()),
+				      clipX = ($('#thenmap').width() * range.value) + 10;
+						overlay.bringToFront();
+					if (overlay._currentImage) {
+						var clip = 'rect(' + [0, clipX, $('#thenmap').height(), 0].join('px,') + 'px)';
+					  	overlay._currentImage._image.style.clip = clip;
+					}
+				}
+				function resetRange() {
+					range['value'] = 0.5;
+					clip();
+				}
+				var overlayMaps = {
+					"2013": underlay,
+				    "2010": underlay2,
+					"2005": oldMap
+				};
+				var layerControl = L.control.layers(overlayMaps, null).addTo(map);
+				map.on('baselayerchange', function(e) {
+					$('#right').text(e.name);
+				});
+
+				$("#range").on("input change", function() { clip(); });
+				map.on('move', clip);
+				
+				$( document ).ready(function() {
+					map.setView([ 49.8412133, -99.9452006], 13);
+				  });
+				
+			</script>
+			
+	</body>
+</html>

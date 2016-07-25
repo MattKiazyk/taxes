@@ -1,0 +1,85 @@
+﻿.wait {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border: 8px solid #5588aa;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+
+    margin-top: -22px;
+    margin-left: -15px;
+    z-index: 999;
+    -moz-animation: rotateanim 0.8s linear 0s infinite normal;
+    -webkit-animation: rotateanim 0.8s linear 0s infinite normal;
+    -o-animation: rotateanim 0.8s linear 0s infinite normal;
+    -ms-animation: rotateanim 0.8s linear 0s infinite normal;
+    animation: rotateanim 0.8s linear 0s infinite normal;
+}
+
+.wait-overlay {
+    border: transparent;
+    background-color: rgba(0,0,0,0.5);
+    cursor: wait;
+}
+
+.wait-lens {
+    /*background: #555; */
+    opacity: .4;
+    width: 100%;
+    height: 100%;
+}
+.no-cssanimations .wait {
+    width: 30px;
+    height: 30px;
+    border: none;
+    -moz-animation: none;
+    -webkit-animation: none;
+    -o-animation: none;
+    -ms-animation: none;
+    animation: none;
+}
+
+
+@-moz-keyframes rotateanim {
+    from {
+        -moz-transform: rotate(0);
+    }
+    to {
+        -moz-transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes rotateanim {
+    from {
+        -webkit-transform: rotate(0);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+@-o-keyframes rotateanim {
+    from {
+        -o-transform: rotate(0);
+    }
+    to {
+        -o-transform: rotate(360deg);
+    }
+}
+@-ms-keyframes rotateanim {
+    from {
+        -ms-transform: rotate(0);
+    }
+    to {
+        -ms-transform: rotate(360deg);
+    }
+}
+@keyframes rotateanim {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

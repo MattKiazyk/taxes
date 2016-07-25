@@ -1,0 +1,45 @@
+---
+layout: default
+title: Council Minutes
+---
+
+<!-- Main -->
+<article id="main">
+
+<section class="wrapper style3 container">
+	<div class="inner">
+	<header>
+		<h2>Council Enquiries Search
+			<footer>
+			<form action="">
+				<div class="row 50%">
+					<div class="8u 12u(mobile)">
+						<input type="text" id="enquirySearch" maxlength="50" autocomplete="off" name="q" placeholder="" />
+					</div>
+					<div class="4u 12u(mobile)">
+						<ul class="buttons">
+							<li><input type="submit" class="special enquiryHeight" value="Search" /></li>
+						</ul>
+					</div>
+				</div>
+			</form>
+			</footer>
+			</h2>
+		
+	</header>
+</div>
+	<div id="minutes-wrapper">					
+		<script id="minutes-template" type="text/x-handlebars-template">
+			<div id="minutes" class="row 150%">
+			{% raw %}
+				{{#minutesInfo minutesInfo}}{{/minutesInfo}}
+			{% endraw %}
+			</div>
+		</script>
+	</div>
+	
+</section>
+
+</article>
+
+		

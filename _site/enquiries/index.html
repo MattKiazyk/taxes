@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Brandon Taxes {% if page.title }%} - {{page.title}}{% endif %}</title>
+		<title>Brandon Taxes  - Council Minutes</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="https://mattkiazyk.github.io/taxes/assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -36,7 +36,46 @@
 
 				</header>
 				
-				{{content}}
+				<!-- Main -->
+<article id="main">
+
+<section class="wrapper style3 container">
+	<div class="inner">
+	<header>
+		<h2>Council Enquiries Search
+			<footer>
+			<form action="">
+				<div class="row 50%">
+					<div class="8u 12u(mobile)">
+						<input type="text" id="enquirySearch" maxlength="50" autocomplete="off" name="q" placeholder="" />
+					</div>
+					<div class="4u 12u(mobile)">
+						<ul class="buttons">
+							<li><input type="submit" class="special enquiryHeight" value="Search" /></li>
+						</ul>
+					</div>
+				</div>
+			</form>
+			</footer>
+			</h2>
+		
+	</header>
+</div>
+	<div id="minutes-wrapper">					
+		<script id="minutes-template" type="text/x-handlebars-template">
+			<div id="minutes" class="row 150%">
+			
+				{{#minutesInfo minutesInfo}}{{/minutesInfo}}
+			
+			</div>
+		</script>
+	</div>
+	
+</section>
+
+</article>
+
+		
 	
 				<section id="cta">
 					<h2>WANT TO <strong>HELP OUT</strong>?</h2>
