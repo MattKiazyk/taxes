@@ -28,11 +28,11 @@
 
 					<nav id="nav">
 						<ul>
-							<li class=""><a href="../">Taxes</a></li>
+							<li class="{% if page.url == '/' }%}current{% endif %}"><a href="../">Taxes</a></li>
 							<!-- doesn't really work that well-->
 							<!--<li class=""><a href="../thenvsnow/">Then vs Now</a></li>-->
-							<li class=""><a href="../assessments/">Assessments</a></li>
-							<li class=""><a href="../enquiries/">Enquiry Search</a></li>
+							<li class="{% if page.url == '/assessments/' }%}current{% endif %}"><a href="../assessments/">Assessments</a></li>
+							<li class="{% if page.url == '/enquiries/' }%}current{% endif %}"><a href="../enquiries/">Enquiry Search</a></li>
 						</ul>					
 					</nav>
 
