@@ -13,7 +13,7 @@ $(document).ready(function () {
 		if (q == null || q == "" || q == " ") {
 			q = " last meeting "
 		} else {
-			q = " with '" + q + "' found"
+			q = " with '" + q + "' found since January 1, 2008"
 		}
 
 		var out = "<div class='12u'>" + enquiryArray.length + " enquiries" + q + "</div>"
