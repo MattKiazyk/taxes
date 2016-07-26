@@ -6,18 +6,18 @@
 -->
 <html>
 	<head>
-		<title>Brandon Taxes - An Open Data Project</title>
+		<title>Brandon Taxes  - Assessments History</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<!--[if lte IE 8]><script src="https://mattkiazyk.github.io/taxes/assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="../assets/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="../assets/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 9]><link rel="stylesheet" href="../assets/css/ie9.css" /><![endif]-->
-		<link rel="stylesheet" media="screen" href="../assets/css/responsive-tables.css" />
-		<link rel="stylesheet" href="../assets/css/jquery.wait-overlay.css" />
-		<link rel="stylesheet" href="../assets/css/jquery-ui.min.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://mattkiazyk.github.io/taxes/assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="https://mattkiazyk.github.io/taxes/assets/css/ie9.css" /><![endif]-->
+		<link rel="stylesheet" media="screen" href="https://mattkiazyk.github.io/taxes/assets/css/responsive-tables.css" />
+		<link rel="stylesheet" href="https://mattkiazyk.github.io/taxes/assets/css/jquery.wait-overlay.css" />
+		<link rel="stylesheet" href="https://mattkiazyk.github.io/taxes/assets/css/jquery-ui.min.css" />
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v1.0.0-rc.1/leaflet.css" />
-		
+
 	</head>
 	<body class="index">
 		<div id="page-wrapper">
@@ -28,37 +28,40 @@
 
 					<nav id="nav">
 						<ul>
-							<li><a href="../" class="">Taxes</a></li>
-							<li><a href="../thenvsnow/" class="">Then vs Now</a></li>
-							<li><a href="assessments/" class="">Assessments</a></li>
+							<li class=""><a href="../">Taxes</a></li>
+							<!-- doesn't really work that well-->
+							<!--<li class=""><a href="../thenvsnow/">Then vs Now</a></li>-->
+							<li class=""><a href="../assessments/">Assessments</a></li>
+							<li class=""><a href="../enquiries/">Enquiry Search</a></li>
 						</ul>					
 					</nav>
 
 				</header>
-	
+				
 				<!-- Main -->
-				<article id="main">
+<article id="main">
 
-					<header class="special container">
-						<span class="icon fa-map-o"></span>
-						<h2>2016 Property Assessments</h2>
-					</header>
+	<header class="special container">
+		<span class="icon fa-map-o"></span>
+		<h2>2016 Property Assessments</h2>
+	</header>
 
+
+	<section class="wrapper style4 container">
+		<div class="content">
+			<p>
+				In 2016 all properties were reassessed. The following map shows residential properties in Brandon and their increase from 2015. Over 99% of residential properties had an increase, with an average of 12.3% increase.
+			</p>
+			<p>All data has been pulled from the <a href="http://web22.gov.mb.ca/mao/public/search_select.aspx">Province of Manitoba Assessment website</a></p>
 		
-					<section class="wrapper style4 container">
-						<div class="content">
-							<p>
-								In 2016 all properties were reassessed. The following map shows residential properties in Brandon and their increase from 2015. Over 99% of residential properties had an increase, with an average of 12.3% increase.
-							</p>
-							<p>All data has been pulled from the <a href="http://web22.gov.mb.ca/mao/public/search_select.aspx">Province of Manitoba Assessment website</a></p>
-						
-							<iframe width="100%" height="920" frameborder="0" src="https://mattkiazyk.cartodb.com/viz/2960235c-1914-11e6-a242-0e674067d321/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
-							
-						</div>
-					</section>
+			<iframe width="100%" height="920" frameborder="0" src="https://mattkiazyk.cartodb.com/viz/2960235c-1914-11e6-a242-0e674067d321/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+			
+		</div>
+	</section>
 
-				</article>
+</article>
 
+	
 				<section id="cta">
 					<h2>WANT TO <strong>HELP OUT</strong>?</h2>
 					<p>BrandonTaxes.com is an <strong>open source</strong> project. </p>
@@ -80,17 +83,29 @@
 		</div>
 
 		<!-- Scripts -->
-	
-			<!--[if lte IE 8]><script src="../assets/js/ie/respond.min.js"></script><![endif]-->
-						<script src="../assets/js/jquery.dropotron.min.js"></script>
-						<script src="../assets/js/jquery.scrolly.min.js"></script>
-						<script src="../assets/js/jquery.scrollgress.min.js"></script>
-						<script src="../assets/js/skel.min.js"></script>
-						<script src="../assets/js/util.js"></script>
-						<script src="../assets/js/handlebars.min-latest.js"></script>
-						<script src="../assets/js/main.js"></script>		
-			<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+			<script src="http://cdn.leafletjs.com/leaflet/v1.0.0-rc.1/leaflet.js"></script>
+			<script src="https://cdn.jsdelivr.net/leaflet.esri/2.0.0-beta.8/esri-leaflet.js"></script>
+					
+			<script src="https://mattkiazyk.github.io/taxes/assets/js/jquery.min.js"></script>
+			<script src="https://mattkiazyk.github.io/taxes/assets/js/jquery.dropotron.min.js"></script>
+			<script src="https://mattkiazyk.github.io/taxes/assets/js/jquery.scrolly.min.js"></script>
+			<script src="https://mattkiazyk.github.io/taxes/assets/js/jquery.scrollgress.min.js"></script>
+			<script src="https://mattkiazyk.github.io/taxes/assets/js/skel.min.js"></script>
+			<script src="https://mattkiazyk.github.io/taxes/assets/js/util.js"></script>
+			<script src="../assets/js/handlebars.min-latest.js"></script>
+			<script src="../assets/js/shared.js"></script>
+			
+			
+			
+			<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-app.js"></script>
+ 			<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>			
+			<script src="https://mattkiazyk.github.io/taxes/assets/js/jquery.wait-overlay.js"></script>
 
+			<script src="https://mattkiazyk.github.io/taxes/assets/js/responsive-tables.js"></script>
+			<!--[if lte IE 8]><script src="https://mattkiazyk.github.io/taxes/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../assets/js/main.js"></script>
+			<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		
 			<script>
 			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -101,7 +116,6 @@
 			  ga('send', 'pageview');
 
 			</script>
-		
 			
 	</body>
 </html>

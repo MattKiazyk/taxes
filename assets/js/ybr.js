@@ -166,8 +166,8 @@ function yearLoop(years, item) {
 $( window ).load(function() {
 	var search = getParameterByName('rollNumber')
 	if (search == null) {
-		return
-	}
+			return
+		}
 	
 	$('html, body').animate({
   	scrollTop: $("#mainData").offset().top
@@ -193,50 +193,44 @@ $( window ).load(function() {
 	loadMap(search);
 	
 	// load Taxes from Firebase Databases
-	var url = 'https://ybr.firebaseio.com/taxes/' + search 
-	var taxesRef = new Firebase(url)
-	taxesRef.authAnonymously(function(error, authData) {
-		  if (error) {
-		    console.log("Authentication failed with Firebase storage!", error);
-		  } else {
-		    console.log("Authenticated successfully with Firebase storage API");
-				taxesRef.on("value", function(snapshot) {
-					// if user fills in an invalid rollNumber. Quit
-					if (!snapshot.exists()) {
-						$('#taxes-wrapper').unwait();
-						Firebase.goOffline();						
-						return
-					}
-					var taxesJSON = {"taxes":snapshot.val()};
-					var taxesHTML = taxesTemplate(taxesJSON)
+	firebase.initializeApp({
+		databaseURL:'https://ybr.firebaseio.com/'
+	})
+	
+	firebase.database().ref('taxes/' + search).on("value", function(snapshot) {
 
-					var assessmentHtml = assessmentTemplate(taxesJSON)
-					var metaHTML = metaTemplate(taxesJSON)
-					var saleHTML = saleTemplate(taxesJSON)
-						
-					$('#taxes-template').replaceWith(taxesHTML)
-					$('#taxes-wrapper').unwait();
-					
-					$('#assessment-template').replaceWith(assessmentHtml);
-					$('#assessment-wrapper').unwait();	
-					
-					$('#meta-template').replaceWith(metaHTML);
-					$('#meta-wrapper').unwait();	
-					
-					$('#sales-template').replaceWith(saleHTML);
-					$('#sales-wrapper').unwait();
-					
-					// To make tables responsive after we've udpated them
-					updateTables();
-					
-					// Disconnect firebase connection as we dont' need it anymore
-					Firebase.goOffline();
-				}, function (errorObject) {
-				  console.log("The read failed: " + errorObject.code);
-				});
+		// if user fills in an invalid rollNumber. Quit
+		if (!snapshot.exists()) {
+			$('#taxes-wrapper').unwait();
+			return
+		}
+		var taxesJSON = {"taxes":snapshot.val()};
+		var taxesHTML = taxesTemplate(taxesJSON)
+
+		var assessmentHtml = assessmentTemplate(taxesJSON)
+		var metaHTML = metaTemplate(taxesJSON)
+		var saleHTML = saleTemplate(taxesJSON)
+			
+		$('#taxes-template').replaceWith(taxesHTML)
+		$('#taxes-wrapper').unwait();
 		
-		  }
-		});
+		$('#assessment-template').replaceWith(assessmentHtml);
+		$('#assessment-wrapper').unwait();	
+		
+		$('#meta-template').replaceWith(metaHTML);
+		$('#meta-wrapper').unwait();	
+		
+		$('#sales-template').replaceWith(saleHTML);
+		$('#sales-wrapper').unwait();
+		
+		// To make tables responsive after we've udpated them
+		updateTables();
+
+	}, function (errorObject) {
+	  console.log("The read failed: " + errorObject.code);
+	});
+
+
 });
 
 function loadMap(rollNo) {
@@ -245,7 +239,7 @@ function loadMap(rollNo) {
 	})
 
 	L.esri.imageMapLayer({
-		url: 'http://gis.brandon.ca/arcgis/rest/services/COBRA/BrandonOrtho2015/ImageServer'
+		url: 'http://gis.brandon.ca/arcgis/rest/services/COBRA/BrandonOrtho2013/ImageServer'
 	}).addTo(map).bringToBack();
 
 	// This will show streets and Property lines. Do we want this? Looks cleaner without.

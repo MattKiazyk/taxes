@@ -6,128 +6,139 @@
 -->
 <html>
 	<head>
-		<title>Brandon Taxes - An Open Data Project</title>
+		<title>Brandon Taxes  - Taxes and Assessments</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<link rel="stylesheet" media="screen" href="assets/css/responsive-tables.css" />
-		<link rel="stylesheet" href="assets/css/jquery.wait-overlay.css" />
-		<link rel="stylesheet" href="assets/css/jquery-ui.min.css" />
+		<!--[if lte IE 8]><script src="https://mattkiazyk.github.io/taxes/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://mattkiazyk.github.io/taxes/assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="https://mattkiazyk.github.io/taxes/assets/css/ie9.css" /><![endif]-->
+		<link rel="stylesheet" media="screen" href="https://mattkiazyk.github.io/taxes/assets/css/responsive-tables.css" />
+		<link rel="stylesheet" href="https://mattkiazyk.github.io/taxes/assets/css/jquery.wait-overlay.css" />
+		<link rel="stylesheet" href="https://mattkiazyk.github.io/taxes/assets/css/jquery-ui.min.css" />
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v1.0.0-rc.1/leaflet.css" />
+
 	</head>
 	<body class="index">
 		<div id="page-wrapper">
 
 			<!-- Header -->
-				<header id="header" class="alt">
-					<h1 id="logo"><a href="index.html">Brandon Taxes</a></h1>
+				<header id="header">
+					<h1 id="logo"><a href="../">Brandon Taxes</a></h1>
 
 					<nav id="nav">
 						<ul>
-							<li><a href="index.html" class="">Taxes</a></li>
-							<li><a href="thenvsnow/" class="">Then vs Now</a></li>
-							<li><a href="assessments/" class="">Assessments</a></li>
+							<li class=""><a href="../">Taxes</a></li>
+							<!-- doesn't really work that well-->
+							<!--<li class=""><a href="../thenvsnow/">Then vs Now</a></li>-->
+							<li class=""><a href="../assessments/">Assessments</a></li>
+							<li class=""><a href="../enquiries/">Enquiry Search</a></li>
 						</ul>					
 					</nav>
 
 				</header>
+				
+				<!-- Banner -->
+<section id="banner">
 
-			<!-- Banner -->
-				<section id="banner">
-
-					<!--
-						".inner" is set up as an inline-block so it automatically expands
-						in both directions to fit whatever's inside it. This means it won't
-						automatically wrap lines, so be sure to use line breaks where
-						appropriate (<br />).
-					-->
-					<div class="inner">
-						<header>
-							<h2>BRANDON TAXES</h2>
-						</header>
-						<p>Type in any <strong>Address</strong> to find more information</p>
-						<footer>
-								<form action="#mainData">
-									<div class="row 50%">
-										<div class="8u 12u(mobile)">
-											<input type="text" id="address" maxlength="50" autocomplete="off" name="rollNumber" placeholder="100 Princess Ave" />
-										</div>
-										<div class="4u 12u(mobile)">
-											<ul class="buttons">
-												<li><input type="submit" class="special" value="Search" /></li>
-											</ul>
-										</div>
-									</div>
-								</form>
-						</footer>
-
+	<!--
+		".inner" is set up as an inline-block so it automatically expands
+		in both directions to fit whatever's inside it. This means it won't
+		automatically wrap lines, so be sure to use line breaks where
+		appropriate (<br />).
+	-->
+	<div class="inner">
+		<header>
+			<h2>BRANDON TAXES</h2>
+		</header>
+		<p>Type in any <strong>Address</strong> to find more information</p>
+		<footer>
+				<form action="#mainData">
+					<div class="row 50%">
+						<div class="8u 12u(mobile)">
+							<input type="text" id="address" maxlength="50" autocomplete="off" name="rollNumber" placeholder="100 Princess Ave" />
+						</div>
+						<div class="4u 12u(mobile)">
+							<ul class="buttons">
+								<li><input type="submit" class="special" value="Search" /></li>
+							</ul>
+						</div>
 					</div>
+				</form>
+		</footer>
 
-				</section>
+	</div>
 
-				<!-- Main -->
-				<article id="main">
+</section>
 
-					<header class="special container">
-						<span class="icon fa-bar-chart-o"></span>
-						<h2>All information below has been<br />obtained through <strong>Open Data</strong></h2>
-						<p>Seriously, please don't take this as a legit document.<br />
-							It is shown for information purposes and as an<br />
-							example of what can be done with Open Data</p>
-					</header>
+<!-- Main -->
+<article id="main">
 
-		
-					<section class="wrapper style3 container special" id="mainData">
-						<header>
-							<h2>Property Information</h2>
-						</header>
-						<div id="meta-wrapper">
-							<script id="meta-template" type="text/x-handlebars-template">
-								<div id="meta">
-									{{#metaTable assessment.meta}}{{/metaTable}}
-								</div>
-							</script>
-						</div>
-						<div id="map">
-							
-						</div>
-						<header>
-							<h2>Brandon Taxes</h2>
-						</header>
-						<div id="taxes-wrapper">
-							<script id="taxes-template" type="text/x-handlebars-template">
-								<div id="taxes">
-									{{#taxesTable taxes}}{{/taxesTable}}
-								</div>
-							</script>
-						</div>
-						<header>
-							<h2>Provincial Assessments</h2>
-						</header>
-						<div id="assessment-wrapper">					
-							<script id="assessment-template" type="text/x-handlebars-template">
-								<div id="assessment">
-									{{#assessmentTable assessment.assessment}}{{/assessmentTable}}
-								</div>
-							</script>
-						</div>
-						<header>
-							<h2>Sales</h2>
-						</header>
-						<div id="sales-wrapper">					
-							<script id="sales-template" type="text/x-handlebars-template">
-								<div id="sales">
-									{{#saleTable sales}}{{/saleTable}}
-								</div>
-							</script>
-						</div>
-					</section>
+	<header class="special container">
+		<span class="icon fa-bar-chart-o"></span>
+		<h2>All information below has been<br />obtained through <strong>Open Data</strong></h2>
+		<p>Seriously, please don't take this as a legit document.<br />
+			It is shown for information purposes and as an<br />
+			example of what can be done with Open Data</p>
+	</header>
 
-				</article>
 
+	<section class="wrapper style3 container special" id="mainData">
+		<header>
+			<h2>Property Information</h2>
+		</header>
+		<div id="meta-wrapper">
+			<script id="meta-template" type="text/x-handlebars-template">
+				<div id="meta">
+					
+					{{#metaTable assessment.meta}}{{/metaTable}}
+					
+				</div>
+			</script>
+		</div>
+		<div id="map">
+			
+		</div>
+		<header>
+			<h2>Brandon Taxes</h2>
+		</header>
+		<div id="taxes-wrapper">
+			<script id="taxes-template" type="text/x-handlebars-template">
+				<div id="taxes">
+					
+					{{#taxesTable taxes}}{{/taxesTable}}
+					
+				</div>
+			</script>
+		</div>
+		<header>
+			<h2>Provincial Assessments</h2>
+		</header>
+		<div id="assessment-wrapper">					
+			<script id="assessment-template" type="text/x-handlebars-template">
+				<div id="assessment">
+					
+					{{#assessmentTable assessment.assessment}}{{/assessmentTable}}
+					
+				</div>
+			</script>
+		</div>
+		<header>
+			<h2>Sales</h2>
+		</header>
+		<div id="sales-wrapper">					
+			<script id="sales-template" type="text/x-handlebars-template">
+				<div id="sales">
+					
+					{{#saleTable sales}}{{/saleTable}}
+					
+				</div>
+			</script>
+		</div>
+	</section>
+
+</article>
+	
 				<section id="cta">
 					<h2>WANT TO <strong>HELP OUT</strong>?</h2>
 					<p>BrandonTaxes.com is an <strong>open source</strong> project. </p>
@@ -152,21 +163,28 @@
 			<script src="http://cdn.leafletjs.com/leaflet/v1.0.0-rc.1/leaflet.js"></script>
 			<script src="https://cdn.jsdelivr.net/leaflet.esri/2.0.0-beta.8/esri-leaflet.js"></script>
 					
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollgress.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/handlebars.min-latest.js"></script>
+			<script src="https://mattkiazyk.github.io/taxes/assets/js/jquery.min.js"></script>
+			<script src="https://mattkiazyk.github.io/taxes/assets/js/jquery.dropotron.min.js"></script>
+			<script src="https://mattkiazyk.github.io/taxes/assets/js/jquery.scrolly.min.js"></script>
+			<script src="https://mattkiazyk.github.io/taxes/assets/js/jquery.scrollgress.min.js"></script>
+			<script src="https://mattkiazyk.github.io/taxes/assets/js/skel.min.js"></script>
+			<script src="https://mattkiazyk.github.io/taxes/assets/js/util.js"></script>
+			<script src="../assets/js/handlebars.min-latest.js"></script>
+			<script src="../assets/js/shared.js"></script>
 			
 			
-			<script src="assets/js/ybr.js"></script>			
-			<script src="assets/js/jquery.wait-overlay.js"></script>
-			<script src="assets/js/firebase.js"></script>
-			<script src="assets/js/responsive-tables.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
+			  
+			  <script src='../assets/js/ybr.js' type="text/javascript"></script>
+			  
+			
+			
+			<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-app.js"></script>
+ 			<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>			
+			<script src="https://mattkiazyk.github.io/taxes/assets/js/jquery.wait-overlay.js"></script>
+
+			<script src="https://mattkiazyk.github.io/taxes/assets/js/responsive-tables.js"></script>
+			<!--[if lte IE 8]><script src="https://mattkiazyk.github.io/taxes/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../assets/js/main.js"></script>
 			<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 		
 			<script>
