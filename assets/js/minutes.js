@@ -9,8 +9,15 @@ $(document).ready(function () {
 
 		// sort based on date
 		enquiryArray.sort(date_sort)
+		var q = getParameterByName('q')
+		if (q == null || q == "" || q == " ") {
+			q = " last meeting "
+		} else {
+			q = " with '" + q + "' found"
+		}
 
-		var out = ""
+		var out = "<div class='12u'>" + enquiryArray.length + " enquiries" + q + "</div>"
+		
 		for (var k in enquiryArray) {
 			var value = enquiryArray[k]
 			out += "<div class='3u 12u(narrower)'>"
