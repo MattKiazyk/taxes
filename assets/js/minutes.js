@@ -13,21 +13,21 @@ $(document).ready(function () {
 		if (q == null || q == "" || q == " ") {
 			q = " last meeting "
 		} else {
-			q = " with '" + q + "' found since January 1, 2008"
+			q = " with '" + q + "' found since January 1, 2006"
 		}
 
 		var out = "<div class='12u'>" + enquiryArray.length + " enquiries" + q + "</div>"
 		
 		for (var k in enquiryArray) {
 			var value = enquiryArray[k]
-			out += "<div class='3u 12u(narrower)'>"
+			out += "<div class='2u 12u(narrower)'>"
 				out += "<div class='sidebar'>"
 					out += "<img src='../assets/images/" + value.councillor + ".jpg' height='180'>"
 					out += "<header>" + value.councillor + "</header>"
 				out += "</div>"
 			out += "</div>"
 			
-			out += "<div class='9u 12u(narrower)'>"
+			out += "<div class='10u 12u(narrower)'>"
 				out += "<header><h3>"
 				out += value.title
 				out += "<br /><a href='" + value.url + "' target='_blank'>" + value.date + "</a>"
