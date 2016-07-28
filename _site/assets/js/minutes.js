@@ -10,8 +10,13 @@ $(document).ready(function () {
 		// sort based on date
 		enquiryArray.sort(date_sort)
 		var q = getParameterByName('q')
+		var d = getParameterByName('d')
 		if (q == null || q == "" || q == " ") {
-			q = " last meeting "
+			if (d == null || d == "" || d == " ") {
+				q = " last meeting "
+			} else {
+				q = " at " + d + " meeting"
+			}
 		} else {
 			q = " with '" + q + "' found since January 1, 2006"
 		}
@@ -22,7 +27,7 @@ $(document).ready(function () {
 			var value = enquiryArray[k]
 			out += "<div class='2u 12u(narrower)'>"
 				out += "<div class='sidebar'>"
-					out += "<img src='../assets/images/" + value.councillor + ".jpg' height='180'>"
+					out += "<img src='../assets/images/" + value.councillor + ".jpg' width='100'>"
 					out += "<header>" + value.councillor + "</header>"
 				out += "</div>"
 			out += "</div>"
@@ -63,11 +68,18 @@ $( window ).load(function() {
 
 	var search = getParameterByName('q')
 	if (search == null || search == "" || search == " ") {
+		
 		//gets latest minutes from last parse
 		firebase.database().ref('config').once('value').then(function(snapshot) {
 			var lastUpdated = snapshot.val().lastUpdated
 			
-			firebase.database().ref('minutes/' + lastUpdated).once('value').then(function(snapshot) {
+			var dateParameter = getParameterByName('d')
+			var url = ('minutes/' + lastUpdated)
+			if (dateParameter != null && dateParameter != "" && dateParameter != " ") {
+				url = ('minutes/' + dateParameter)
+			}
+			
+			firebase.database().ref(url).once('value').then(function(snapshot) {
 				var minutesHTML = minutesTemplate(snapshot.val())
 				$('#minutes-template').replaceWith(minutesHTML)
 				$('#minutes-wrapper').unwait();
