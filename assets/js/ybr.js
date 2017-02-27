@@ -96,9 +96,35 @@ $(document).ready(function () {
 		out = out + "<tr>"
 		out = out + "<th>Type</th>";
 		
-		for (year = startYear - 1; year > 2000; year--) {
+		// add in 2017 estimates
+		var residentalRate = .45
+		var currentAssessment = parseInt(items[2017].assessment['Total'].replace(",",""))
+		var councilIncrease = 0.00940 //0.94% increase
+		var millRate = 16.001
+		var schoolMillRate = 14.91 //14.50 2016 * 1.0285
+
+		if (items[2016] && currentAssessment) {
+			var propertyValue = (currentAssessment * residentalRate / 1000 )
+			var municipalBase =  propertyValue * millRate
+			var municipal = municipalBase - items[2016]["Loc_Imp_Debt_Serv"]
+			
+			items[2017]["School_Division"] = propertyValue * schoolMillRate
+			items[2017]["Provincial_Education"] = items[2016]["Provincial_Education"]
+			items[2017]["General_Municipal"] = municipal
+			items[2017]["Loc_Imp_Debt_Serv"] = items[2016]["Loc_Imp_Debt_Serv"]
+			items[2017]["Gross_Tax_Amount"] = items[2017]["General_Municipal"] + items[2017]["Loc_Imp_Debt_Serv"] + items[2017]["School_Division"] + items[2017]["Provincial_Education"] 
+			items[2017]["Home_Owner_Grant"] = items[2016]["Home_Owner_Grant"] 
+			items[2017]["Net_Tax_Amount"] = items[2017]["Gross_Tax_Amount"] - items[2017]["Home_Owner_Grant"] 
+		}
+		
+		
+		for (year = startYear; year > 2000; year--) {
 			if (items[year]) {
-				out = out + "<th>" + year + "</th>"
+				if (year == 2017) {
+					out = out + "<th>" + year + "*</th>"					
+				} else {
+					out = out + "<th>" + year + "</th>"
+				}
 			}
 		}
 		out = out + "</tr>"
@@ -124,7 +150,9 @@ $(document).ready(function () {
 		out = out + "<tr>"
 	  out = out + "<td>Net Tax Amount</td>" + yearLoop(items, "Net_Tax_Amount");
 		out = out + "</tr>"
-	  return out + "</table>";
+		out = out + "</table>"
+		
+	  return out + "<strong>* 2017 ESTIMATED - Actual 2017 may vary</strong> <br/><br/>";
 	});
 	
 	Handlebars.registerHelper('metaTable', function(items, options) {
@@ -154,7 +182,7 @@ $(document).ready(function () {
 
 function yearLoop(years, item) {
 	var out = ""
-	for (year = startYear - 1; year > 2000; year--) {
+	for (year = startYear; year > 2000; year--) {
 		if (years[year]) {
 			out = out + "<td>$" + Number(years[year][item]).formatMoney()  + "</td>"
 		}
