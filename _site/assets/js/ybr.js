@@ -98,13 +98,22 @@ $(document).ready(function () {
 		
 		// add in 2017 estimates
 		var residentalRate = .45
-		var currentAssessment = parseInt(items[2017].assessment['Total'].replace(",",""))
+		var commercialRate = .65
+		
+		var currentAssessment = parseInt(items[2017].assessment['Total'].replace(/,/g,""))
 		var councilIncrease = 0.00940 //0.94% increase
 		var millRate = 16.001
 		var schoolMillRate = 14.91 //14.50 2016 * 1.0285
+		console.log(items[2017])
+		console.log(currentAssessment)
 
 		if (items[2016] && currentAssessment) {
-			var propertyValue = (currentAssessment * residentalRate / 1000 )
+			var rate = residentalRate
+			if (items[2017].assessment['Class'] == "OTHER PROPERTY") {
+				rate = commercialRate
+			}
+			var propertyValue = (currentAssessment * rate / 1000 )
+			console.log(propertyValue)
 			var municipalBase =  propertyValue * millRate
 			var municipal = municipalBase - items[2016]["Loc_Imp_Debt_Serv"]
 			
