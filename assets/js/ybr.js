@@ -1,4 +1,4 @@
-var startYear = 2017
+var startYear = 2018
 		
 //**AUTOCOMPLETE **//
 $(function() {
@@ -127,13 +127,9 @@ $(document).ready(function () {
 		}
 		
 		
-		for (year = startYear; year > 2000; year--) {
-			if (items[year]) {
-				if (year == 2017) {
-					out = out + "<th>" + year + "*</th>"					
-				} else {
-					out = out + "<th>" + year + "</th>"
-				}
+		for (year = startYear - 1; year > 2000; year--) {
+			if (items[year]) {	
+				out = out + "<th>" + year + "</th>"
 			}
 		}
 		out = out + "</tr>"
@@ -191,7 +187,7 @@ $(document).ready(function () {
 
 function yearLoop(years, item) {
 	var out = ""
-	for (year = startYear; year > 2000; year--) {
+	for (year = startYear - 1; year > 2000; year--) {
 		if (years[year]) {
 			out = out + "<td>$" + Number(years[year][item]).formatMoney()  + "</td>"
 		}
