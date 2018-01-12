@@ -100,7 +100,7 @@ $(document).ready(function () {
 		var residentalRate = .45
 		var commercialRate = .65
 		
-		var currentAssessment = parseInt(items[2017].assessment['Total'].replace(/,/g,""))
+		var currentAssessment = parseInt(items[2018].assessment['Total'].replace(/,/g,""))
 		var councilIncrease = 0.00940 //0.94% increase
 		var millRate = 16.101
 		var schoolMillRate = 14.91 //14.50 2016 * 1.0285
@@ -157,7 +157,7 @@ $(document).ready(function () {
 		out = out + "</tr>"
 		out = out + "</table>"
 		
-	  return out + "<strong>* 2017 ESTIMATED - Actual 2017 may vary</strong> <br/><br/>";
+	  return out + "<strong>* 2018 ESTIMATED - Actual 208 may vary</strong> <br/><br/>";
 	});
 	
 	Handlebars.registerHelper('metaTable', function(items, options) {

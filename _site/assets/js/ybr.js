@@ -157,7 +157,7 @@ $(document).ready(function () {
 		out = out + "</tr>"
 		out = out + "</table>"
 		
-	  return out + "<strong>* 2018 ESTIMATED - Actual 2018 may vary</strong> <br/><br/>";
+	  return out + "<strong>* 2018 ESTIMATED - Actual 208 may vary</strong> <br/><br/>";
 	});
 	
 	Handlebars.registerHelper('metaTable', function(items, options) {
