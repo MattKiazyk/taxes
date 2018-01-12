@@ -100,7 +100,7 @@ $(document).ready(function () {
 		var residentalRate = .45
 		var commercialRate = .65
 		
-		var currentAssessment = parseInt(items[2017].assessment['Total'].replace(/,/g,""))
+		var currentAssessment = parseInt(items[2018].assessment['Total'].replace(/,/g,""))
 		var councilIncrease = 0.00940 //0.94% increase
 		var millRate = 16.101
 		var schoolMillRate = 14.91 //14.50 2016 * 1.0285
