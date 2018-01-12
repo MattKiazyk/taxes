@@ -1,4 +1,4 @@
-var startYear = 2018
+var startYear = 2019
 		
 //**AUTOCOMPLETE **//
 $(function() {
@@ -102,12 +102,12 @@ $(document).ready(function () {
 		
 		var currentAssessment = parseInt(items[2017].assessment['Total'].replace(/,/g,""))
 		var councilIncrease = 0.00940 //0.94% increase
-		var millRate = 16.001
+		var millRate = 16.101
 		var schoolMillRate = 14.91 //14.50 2016 * 1.0285
 		console.log(items[2017])
 		console.log(currentAssessment)
 
-		if (items[2016] && currentAssessment) {
+		if (items[2017] && currentAssessment) {
 			var rate = residentalRate
 			if (items[2017].assessment['Class'] == "OTHER PROPERTY") {
 				rate = commercialRate
@@ -115,15 +115,15 @@ $(document).ready(function () {
 			var propertyValue = (currentAssessment * rate / 1000 )
 			console.log(propertyValue)
 			var municipalBase =  propertyValue * millRate
-			var municipal = municipalBase - items[2016]["Loc_Imp_Debt_Serv"]
+			var municipal = municipalBase - items[2017]["Loc_Imp_Debt_Serv"]
 			
-			items[2017]["School_Division"] = propertyValue * schoolMillRate
-			items[2017]["Provincial_Education"] = items[2016]["Provincial_Education"]
-			items[2017]["General_Municipal"] = municipal
-			items[2017]["Loc_Imp_Debt_Serv"] = items[2016]["Loc_Imp_Debt_Serv"]
-			items[2017]["Gross_Tax_Amount"] = items[2017]["General_Municipal"] + items[2017]["Loc_Imp_Debt_Serv"] + items[2017]["School_Division"] + items[2017]["Provincial_Education"] 
-			items[2017]["Home_Owner_Grant"] = items[2016]["Home_Owner_Grant"] 
-			items[2017]["Net_Tax_Amount"] = items[2017]["Gross_Tax_Amount"] - items[2017]["Home_Owner_Grant"] 
+			items[2018]["School_Division"] = propertyValue * schoolMillRate
+			items[2018]["Provincial_Education"] = items[2017]["Provincial_Education"]
+			items[2018]["General_Municipal"] = municipal
+			items[2018]["Loc_Imp_Debt_Serv"] = items[2017]["Loc_Imp_Debt_Serv"]
+			items[2018]["Gross_Tax_Amount"] = items[2018]["General_Municipal"] + items[2018]["Loc_Imp_Debt_Serv"] + items[2018]["School_Division"] + items[2018]["Provincial_Education"] 
+			items[2018]["Home_Owner_Grant"] = items[2017]["Home_Owner_Grant"] 
+			items[2018]["Net_Tax_Amount"] = items[2018]["Gross_Tax_Amount"] - items[2018]["Home_Owner_Grant"] 
 		}
 		
 		
@@ -157,7 +157,7 @@ $(document).ready(function () {
 		out = out + "</tr>"
 		out = out + "</table>"
 		
-	  return out + "<strong>* 2017 ESTIMATED - Actual 2017 may vary</strong> <br/><br/>";
+	  return out + "<strong>* 2018 ESTIMATED - Actual 2018 may vary</strong> <br/><br/>";
 	});
 	
 	Handlebars.registerHelper('metaTable', function(items, options) {
