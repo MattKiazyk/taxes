@@ -102,7 +102,7 @@ $(document).ready(function () {
 		
 		var currentAssessment = parseInt(items[2018].assessment['Total'].replace(/,/g,""))
 		var councilIncrease = 0.00940 //0.94% increase
-		var millRate = 16.101
+		var millRate = 15.867
 		var schoolMillRate = 14.91 //14.50 2016 * 1.0285
 		console.log(items[2017])
 		console.log(currentAssessment)
