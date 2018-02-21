@@ -103,7 +103,7 @@ $(document).ready(function () {
 		var currentAssessment = parseInt(items[2018].assessment['Total'].replace(/,/g,""))
 		var councilIncrease = 0.00940 //0.94% increase
 		var millRate = 15.867
-		var schoolMillRate = 14.91 //14.50 2016 * 1.0285
+		var schoolMillRate = 15.055 //14.91 2016 * 0.97
 		console.log(items[2017])
 		console.log(currentAssessment)
 
@@ -157,7 +157,7 @@ $(document).ready(function () {
 		out = out + "</tr>"
 		out = out + "</table>"
 		
-	  return out + "<strong>* 2018 ESTIMATED - Actual 2018 property taxes may vary</strong> <br/><br/>";
+	  return out + "<strong>* 2018 ESTIMATED - Based on  proposed millRate increases - Actual 2018 property taxes may vary</strong> <br/><br/>";
 	});
 	
 	Handlebars.registerHelper('metaTable', function(items, options) {
