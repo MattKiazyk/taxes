@@ -272,25 +272,25 @@ function loadMap(rollNo) {
 	})
 
 	L.esri.imageMapLayer({
-		url: 'http://gis.brandon.ca/arcgis/rest/services/COBRA/BrandonOrtho2013/ImageServer'
+		url: 'https://gisapp.brandon.ca/arcgis/rest/services/Imagery/Imagery_2013/ImageServer'
 	}).addTo(map).bringToBack();
 
 	// This will show streets and Property lines. Do we want this? Looks cleaner without.
-	L.esri.dynamicMapLayer({
-		url: 'http://gis.brandon.ca/arcgis/rest/services/Juliet/propertySearch/MapServer',
-		transparent : true,
-		layers : [1,2,4,8,10],
-		imageSR : 26914
-	}).addTo(map).bringToFront();
+	// L.esri.dynamicMapLayer({
+	// 	url: 'http://gis.brandon.ca/arcgis/rest/services/Juliet/propertySearch/MapServer',
+	// 	transparent : true,
+	// 	layers : [1,2,4,8,10],
+	// 	imageSR : 26914
+	// }).addTo(map).bringToFront();
 	
 	// Shows property polygon
 	var find = L.esri.find({
-		url: 'http://gis.brandon.ca/arcgis/rest/services/Juliet/propTax/MapServer'
+		url: 'https://gisapp.brandon.ca/arcgis/rest/services/Open_Data/Open_Data/MapServer'
 	});
 
-	find.layers('0')
+	find.layers('22')
 			.text(rollNo)
-			.fields('BROLL')
+			.fields('ROLL_NUM')
 			.contains(false)
 		
 	find.run(function(error, featureCollection, response){
@@ -303,37 +303,39 @@ function loadMap(rollNo) {
 		map.fitBounds(polygon.getBounds().pad(0.5));
 	});
 	
-	// LEAD PIPES
-	var query = L.esri.query({
-		    url:'http://gis.brandon.ca/arcgis/rest/services/COBRA/COBRAmapService/MapServer/12'
-		});
-		
-		query.where("InstallDate<='Jan 1, 1952'");
-		
-		query.run(function(error, featureCollection, response){
-		    console.log('Found ' + featureCollection.features.length + ' features');
-				var polyLine =	L.geoJson(featureCollection, {
-					style: leadPipeStyle,
-					onEachFeature: onEachFeature
-				});
-				polyLine.addTo(map).bringToFront();
-
-		});
-		
-		var info = L.control();
-
-		info.onAdd = function (map) {
-		    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-		    this.update();
-		    return this._div;
-		};
-
-		// method that we will use to update the control based on feature properties passed
-		info.update = function (props) {
-		    this._div.innerHTML = '<h4>Lead Pipes</h4>Click on any red line to<br />show info on potential lead pipes.</br><a href="http://www.brandon.ca/water-treatment/lead-water-services-information">More Info</a>';
-		};
-
-		info.addTo(map);
+	// can't find lead pipes on gisapp services
+		// 
+		// // LEAD PIPES
+		// var query = L.esri.query({
+		// 	    url:'http://gis.brandon.ca/arcgis/rest/services/COBRA/COBRAmapService/MapServer/12'
+		// 	});
+		// 	
+		// 	query.where("InstallDate<='Jan 1, 1952'");
+		// 	
+		// 	query.run(function(error, featureCollection, response){
+		// 	    console.log('Found ' + featureCollection.features.length + ' features');
+		// 			var polyLine =	L.geoJson(featureCollection, {
+		// 				style: leadPipeStyle,
+		// 				onEachFeature: onEachFeature
+		// 			});
+		// 			polyLine.addTo(map).bringToFront();
+		// 
+		// 	});
+		// 	
+		// 	var info = L.control();
+		// 
+		// 	info.onAdd = function (map) {
+		// 	    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+		// 	    this.update();
+		// 	    return this._div;
+		// 	};
+		// 
+		// 	// method that we will use to update the control based on feature properties passed
+		// 	info.update = function (props) {
+		// 	    this._div.innerHTML = '<h4>Lead Pipes</h4>Click on any red line to<br />show info on potential lead pipes.</br><a href="http://www.brandon.ca/water-treatment/lead-water-services-information">More Info</a>';
+		// 	};
+		// 
+		// 	info.addTo(map);
 }
 
 function style(feature) {
