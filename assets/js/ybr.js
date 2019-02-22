@@ -118,7 +118,7 @@ $(document).ready(function () {
 		var currentAssessment = startYearAssessment.replace(/,/g,"")
 		var councilIncrease = 0.01170 //1.17% increase
 		var millRate = 16.034 // 2019 mill rate
-		var schoolMillRate = 15.048 //14.91 2016 * 0.97
+		var schoolMillRate = 15.003 //15.05 * -0.31% // 2018 mill rate
 
 		items =  items.reverse(); // sort opposite of what it comes so latest is first
 
@@ -133,9 +133,10 @@ $(document).ready(function () {
 			var propertyValue = (currentAssessment * rate / 1000 )
 
 			var municipalBase =  propertyValue * millRate
+			var schoolRate = propertyValue * schoolMillRate
 			var municipal = municipalBase - firstItem["LOCAL_IMPROVEMENTS"]
 
-			item2019["BRANDON_SCHOOL_DIVISION"] = Number(firstItem["BRANDON_SCHOOL_DIVISION"]) //propertyValue * schoolMillRate
+			item2019["BRANDON_SCHOOL_DIVISION"] =  Number(schoolRate)//Number(firstItem["BRANDON_SCHOOL_DIVISION"]) //propertyValue * schoolMillRate
 			item2019["PROVINCIAL_SCHOOL"] = Number(firstItem["PROVINCIAL_SCHOOL"])
 			item2019["GENERAL_MUNICIPAL"] = Number(municipal)
 			item2019["LOCAL_IMPROVEMENTS"] = Number(firstItem["LOCAL_IMPROVEMENTS"])
