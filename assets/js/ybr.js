@@ -359,7 +359,7 @@ function loadMap(rollNo) {
 	})
 
 	L.esri.imageMapLayer({
-		url: 'https://gisapp.brandon.ca/arcgis/rest/services/Imagery/Imagery_2013/ImageServer'
+		url: 'https://gisapp.brandon.ca/arcgis/rest/services/Imagery/Imagery_2018/ImageServer'
 	}).addTo(map).bringToBack();
 
 	// This will show streets and Property lines. Do we want this? Looks cleaner without.
