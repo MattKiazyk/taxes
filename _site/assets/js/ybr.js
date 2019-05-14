@@ -125,7 +125,7 @@ $(document).ready(function () {
 		var item2019 = {}
 
 		var firstItem = items[0]
-		if ((firstItem["TAX_YEAR"].replace(/\s/g,'') === "" + 2018) && currentAssessment) {
+		if ((firstItem["TAX_YEAR"].replace(/\s/g,'') === "" + 2019) && currentAssessment) {
 			var rate = residentalRate
 			if (startYearAssessmentClass == "OTHER PROPERTY") {
 				rate = commercialRate
@@ -136,7 +136,7 @@ $(document).ready(function () {
 			var schoolRate = propertyValue * schoolMillRate
 			var municipal = municipalBase - firstItem["LOCAL_IMPROVEMENTS"]
 
-			item2019["BRANDON_SCHOOL_DIVISION"] =  Number(schoolRate)//Number(firstItem["BRANDON_SCHOOL_DIVISION"]) //propertyValue * schoolMillRate
+			item2019["BRANDON_SCHOOL_DIVISION"] =  Number(firstItem["BRANDON_SCHOOL_DIVISION"])//Number(schoolRate)// //propertyValue * schoolMillRate
 			item2019["PROVINCIAL_SCHOOL"] = Number(firstItem["PROVINCIAL_SCHOOL"])
 			item2019["GENERAL_MUNICIPAL"] = Number(municipal)
 			item2019["LOCAL_IMPROVEMENTS"] = Number(firstItem["LOCAL_IMPROVEMENTS"])
@@ -190,7 +190,7 @@ $(document).ready(function () {
 		out = out + "</tr>"
 		out = out + "</table>"
 
-	  return out + "<strong>* 2019 ESTIMATED - Based on proposed millRate increases with ACTUAL 2019 property assessments. Actual 2019 property taxes may vary in May</strong> <br/><br/>";
+	  return out + "<strong>* Actual 2019 property taxes may vary in May (but should be pretty close)</strong> <br/><br/>";
 	});
 
 	Handlebars.registerHelper('metaTable', function(items, options) {
