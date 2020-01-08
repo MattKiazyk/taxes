@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "~> 2.5.3"
-gem "jekyll", "~> 3.7.3"
-gem 'github-pages', group: :jekyll_plugins
+ruby "~> 2.6.3"
+gem "jekyll", "~> 4.0.0"
+#gem 'github-pages', group: :jekyll_plugins
 gem 'jekyll-seo-tag'

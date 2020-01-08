@@ -1,4 +1,4 @@
-var startYear = 2019
+var startYear = 2020
 var startYearAssessment = 0
 var startYearAssessmentClass = ""
 var searchRollNo = 0
@@ -111,18 +111,18 @@ $(document).ready(function () {
 		out = out + "<tr>"
 		out = out + "<th>Type</th>";
 
-		// add in 2019 estimates
+		// add in 2020 estimates
 		var residentalRate = .45
 		var commercialRate = .65
 
 		var currentAssessment = startYearAssessment.replace(/,/g,"")
-		var councilIncrease = 0.01170 //1.17% increase
-		var millRate = 16.034 // 2019 mill rate
+		// var councilIncrease = 0.02197 //2.97% increase
+		var millRate = 16.034 + (16.034 * .0297) // 2019 mill rate
 		var schoolMillRate = 14.990 //2019 proposed
 
 		items =  items.reverse(); // sort opposite of what it comes so latest is first
 
-		var item2019 = {}
+		var item2020 = {}
 
 		var firstItem = items[0]
 		if ((firstItem["TAX_YEAR"].replace(/\s/g,'') === "" + 2019) && currentAssessment) {
@@ -131,20 +131,19 @@ $(document).ready(function () {
 				rate = commercialRate
 			}
 			var propertyValue = (currentAssessment * rate / 1000 )
-
-			var municipalBase =  propertyValue * millRate
+			var municipalBase = propertyValue * millRate
 			var schoolRate = propertyValue * schoolMillRate
 			var municipal = municipalBase - firstItem["LOCAL_IMPROVEMENTS"]
 
-			item2019["BRANDON_SCHOOL_DIVISION"] =  Number(firstItem["BRANDON_SCHOOL_DIVISION"])//Number(schoolRate)// //propertyValue * schoolMillRate
-			item2019["PROVINCIAL_SCHOOL"] = Number(firstItem["PROVINCIAL_SCHOOL"])
-			item2019["GENERAL_MUNICIPAL"] = Number(municipal)
-			item2019["LOCAL_IMPROVEMENTS"] = Number(firstItem["LOCAL_IMPROVEMENTS"])
-		 	item2019["GROSS_TAX"] = item2019["GENERAL_MUNICIPAL"] + item2019["LOCAL_IMPROVEMENTS"] + item2019["BRANDON_SCHOOL_DIVISION"] + item2019["PROVINCIAL_SCHOOL"]
-			item2019["HOG_AMOUNT_CLAIMED"] = firstItem["HOG_AMOUNT_CLAIMED"]
-			item2019["NET_TAX"] = item2019["GROSS_TAX"] - item2019["HOG_AMOUNT_CLAIMED"]
-			item2019["TAX_YEAR"] = "2019"
-		  items.unshift(item2019)
+			item2020["BRANDON_SCHOOL_DIVISION"] =  Number(firstItem["BRANDON_SCHOOL_DIVISION"])//Number(schoolRate)// //propertyValue * schoolMillRate
+			item2020["PROVINCIAL_SCHOOL"] = Number(firstItem["PROVINCIAL_SCHOOL"])
+			item2020["GENERAL_MUNICIPAL"] = Number(municipal)
+			item2020["LOCAL_IMPROVEMENTS"] = Number(firstItem["LOCAL_IMPROVEMENTS"])
+		 	item2020["GROSS_TAX"] = item2020["GENERAL_MUNICIPAL"] + item2020["LOCAL_IMPROVEMENTS"] + item2020["BRANDON_SCHOOL_DIVISION"] + item2020["PROVINCIAL_SCHOOL"]
+			item2020["HOG_AMOUNT_CLAIMED"] = firstItem["HOG_AMOUNT_CLAIMED"]
+			item2020["NET_TAX"] = item2020["GROSS_TAX"] - item2020["HOG_AMOUNT_CLAIMED"]
+			item2020["TAX_YEAR"] = "2020"
+		  items.unshift(item2020)
 		}
 
 
@@ -190,7 +189,7 @@ $(document).ready(function () {
 		out = out + "</tr>"
 		out = out + "</table>"
 
-	  return out + "<strong>* Actual 2019 property taxes may vary in May (but should be pretty close)</strong> <br/><br/>";
+	  return out + "<strong>* 2020 ESTIMATED - Based on proposed millRate increases with ACTUAL 2020 property assessments. Actual 2020 property taxes may vary in May</strong> <br/><br/>";
 	});
 
 	Handlebars.registerHelper('metaTable', function(items, options) {
