@@ -117,7 +117,7 @@ $(document).ready(function () {
 
 		var currentAssessment = startYearAssessment.replace(/,/g,"")
 		// var councilIncrease = 0.02197 //2.97% increase
-		var millRate = 16.034 + (16.034 * .0297) // 2019 mill rate
+		var millRate = 15.641//16.034 + (16.034 * .0297) // 2019 mill rate
 		var schoolMillRate = 14.990 //2019 proposed
 
 		items =  items.reverse(); // sort opposite of what it comes so latest is first
