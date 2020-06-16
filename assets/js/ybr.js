@@ -118,7 +118,7 @@ $(document).ready(function () {
 		var currentAssessment = startYearAssessment.replace(/,/g,"")
 		// var councilIncrease = 0.02197 //2.97% increase
 		var millRate = 15.641//16.034 + (16.034 * .0297) // 2019 mill rate
-		var schoolMillRate = 14.990 //2019 proposed
+		var schoolMillRate = 14.708 //2020 actual
 
 		items =  items.reverse(); // sort opposite of what it comes so latest is first
 
@@ -135,7 +135,7 @@ $(document).ready(function () {
 			var schoolRate = propertyValue * schoolMillRate
 			var municipal = municipalBase - firstItem["LOCAL_IMPROVEMENTS"]
 
-			item2020["BRANDON_SCHOOL_DIVISION"] =  Number(firstItem["BRANDON_SCHOOL_DIVISION"])//Number(schoolRate)// //propertyValue * schoolMillRate
+			item2020["BRANDON_SCHOOL_DIVISION"] =  Number(propertyValue * schoolMillRate)
 			item2020["PROVINCIAL_SCHOOL"] = Number(firstItem["PROVINCIAL_SCHOOL"])
 			item2020["GENERAL_MUNICIPAL"] = Number(municipal)
 			item2020["LOCAL_IMPROVEMENTS"] = Number(firstItem["LOCAL_IMPROVEMENTS"])
@@ -189,7 +189,7 @@ $(document).ready(function () {
 		out = out + "</tr>"
 		out = out + "</table>"
 
-	  return out + "<strong>* 2020 ESTIMATED - Based on proposed millRate increases with ACTUAL 2020 property assessments. Actual 2020 property taxes may vary in May</strong> <br/><br/>";
+	  return out + "<strong>* Actual 2020 property taxes may vary on properties</strong> <br/><br/>";
 	});
 
 	Handlebars.registerHelper('metaTable', function(items, options) {
